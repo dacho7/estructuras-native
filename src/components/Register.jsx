@@ -10,30 +10,30 @@ import {
   Alert,
 } from "react-native";
 import { BlurView } from "expo-blur";
-import { CREAR_CUENTA } from "../services/auth";
+import { REGISTER_ACCOUNT } from "../services/auth";
 
 const backgroundImg = require("../../assets/fondo.jpg");
 
 const userImage = require("../../assets/usuario.png");
 
 export default function Login() {
-  const [email, setEmail] = useState(0);
+  const [user, setUser] = useState(0);
   const [passwd, setPasswd] = useState(0);
   const [newPass, setNewPass] = useState(0);
 
-  const handleSingIn = async () => {
+  const handleRegister = async () => {
     try {
       if (passwd !== newPass) {
         Alert.alert("Las contraseñas no coinciden");
-      } else if (email.length < 3) {
+      } else if (user.length < 3) {
         Alert.alert("Debe ingresar un usuario valido");
       } else if (passwd.length < 6) {
         Alert.alert("La contraseñas debe tener mínimo 6 caracteres");
       } else {
-        setEmail("");
+        setUser("");
         setPasswd("");
         setNewPass("");
-        //await CREAR_CUENTA(email + "@gmail.com", passwd);
+        REGISTER_ACCOUNT(user + "@gmail.com", passwd);
         Alert.alert("Usuario registrado con Exito");
       }
     } catch (error) {
@@ -68,7 +68,7 @@ export default function Login() {
               <TextInput
                 style={styles.input}
                 placeholder="Ingrese nombre de usuario"
-                onChangeText={(text) => setEmail(text)}
+                onChangeText={(text) => setUser(text)}
               ></TextInput>
             </View>
             <View>
@@ -93,7 +93,7 @@ export default function Login() {
               ></TextInput>
             </View>
             <TouchableOpacity
-              onPress={handleSingIn}
+              onPress={handleRegister}
               style={[
                 styles.button,
                 { backgroundColor: "#1CD2F6", marginVertical: 5 },

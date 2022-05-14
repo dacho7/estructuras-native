@@ -11,21 +11,22 @@ import {
   Alert,
 } from "react-native";
 import { BlurView } from "expo-blur";
-import { CREAR_CUENTA } from "../services/auth";
+import { LOGIN } from "../services/auth";
 
 const backgroundImg = require("../../assets/fondo.jpg");
 
 const userImage = require("../../assets/usuario.png");
 
 export default function Login() {
-  const [email, setEmail] = useState(0);
+  const [user, setUser] = useState(0);
   const [passwd, setPasswd] = useState(0);
 
   const handleSingIn = async () => {
     try {
-      await CREAR_CUENTA(email, passwd);
+      await LOGIN(user + "@gmail.com", passwd);
+      Alert.alert("Ingreso Exitoso");
     } catch (error) {
-      Alert.alert("Ocurrio algo, por favor intente nuevamente");
+      Alert.alert("Usuario o contraseña incorrecta");
     }
   };
 
@@ -57,7 +58,7 @@ export default function Login() {
               <TextInput
                 style={styles.input}
                 placeholder="Digite usuario"
-                onChangeText={(text) => setEmail(text)}
+                onChangeText={(text) => setUser(text)}
               ></TextInput>
             </View>
             <View>
@@ -85,7 +86,6 @@ export default function Login() {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={handleSingIn}
               style={[
                 styles.button,
                 { backgroundColor: "#09D6E7", height: 33, marginVertical: 30 },
