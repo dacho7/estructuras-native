@@ -13,10 +13,9 @@ import {
 import { BlurView } from "expo-blur";
 import { CREAR_CUENTA } from "../services/auth";
 
-const uri =
-  "https://www.todofondos.net/wp-content/uploads/window-blue-wallpaper-temas-fondo-de-pantalla.jpg";
-const profilePicture =
-  "https://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png";
+const backgroundImg = require("../../assets/fondo.jpg");
+
+const userImage = require("../../assets/usuario.png");
 
 export default function Login() {
   const [email, setEmail] = useState(0);
@@ -32,26 +31,11 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
-      <Image source={{ uri }} style={[styles.image, StyleSheet.absoluteFill]} />
-      {/* <View
-        style={{
-          width: 100,
-          height: 100,
-          backgroundColor: "purple",
-          position: "absolute",
-        }}
-      ></View>
-      <View
-        style={{
-          width: 100,
-          height: 100,
-          backgroundColor: "purple",
-          bottom: 120,
-          position: "absolute",
-          borderRadius: 50,
-          transform: [{ rotate: "45deg" }],
-        }}
-      ></View> */}
+      <Image
+        source={backgroundImg}
+        style={[styles.image, StyleSheet.absoluteFill]}
+      />
+
       <ScrollView
         contentContainerStyle={{
           flex: 1,
@@ -61,39 +45,54 @@ export default function Login() {
           justifyContent: "center",
         }}
       >
-        <BlurView intensity={200}>
+        <BlurView intensity={200} style={{ borderRadius: 20 }}>
           <View style={styles.login}>
-            <Image
-              source={{ uri: profilePicture }}
-              style={styles.profilePicture}
-            />
+            <Image source={userImage} style={styles.profilePicture} />
             <View>
-              <Text style={{ fontSize: 17, fontWeight: "400", color: "black" }}>
-                E-mail
+              <Text
+                style={{ fontSize: 17, fontWeight: "400", color: "#676767" }}
+              >
+                Nombre de usuario
               </Text>
               <TextInput
                 style={styles.input}
-                placeholder="example@gmail.com"
+                placeholder="Digite usuario"
                 onChangeText={(text) => setEmail(text)}
               ></TextInput>
             </View>
             <View>
-              <Text style={{ fontSize: 17, fontWeight: "400", color: "black" }}>
-                Password
+              <Text
+                style={{ fontSize: 17, fontWeight: "400", color: "#676767" }}
+              >
+                Contraseña
               </Text>
               <TextInput
                 style={styles.input}
-                placeholder="example@gmail.com"
+                placeholder="Digite contraseña"
                 onChangeText={(text) => setPasswd(text)}
                 secureTextEntry={true}
               ></TextInput>
             </View>
             <TouchableOpacity
               onPress={handleSingIn}
-              style={[styles.button, { backgroundColor: "#00CFEB90" }]}
+              style={[
+                styles.button,
+                { backgroundColor: "#2166DF", height: 40 },
+              ]}
             >
               <Text style={{ fontSize: 17, fontWeight: "400", color: "white" }}>
-                Login
+                Ingresar
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={handleSingIn}
+              style={[
+                styles.button,
+                { backgroundColor: "#09D6E7", height: 33, marginVertical: 30 },
+              ]}
+            >
+              <Text style={{ fontSize: 17, fontWeight: "400", color: "white" }}>
+                Registrarme
               </Text>
             </TouchableOpacity>
           </View>
@@ -117,30 +116,25 @@ const styles = StyleSheet.create({
   },
   login: {
     width: 350,
-    height: 500,
-    borderColor: "#fff",
-    borderWidth: 2,
+    height: 550,
     borderRadius: 10,
     padding: 10,
     alignItems: "center",
   },
   profilePicture: {
-    width: "50%",
-    height: "36%",
+    width: 130,
+    height: 130,
     borderRadius: 50,
-    //borderColor: "#fff",
-    //borderWidth: 1,
     marginVertical: 30,
   },
   input: {
     width: 250,
     height: 40,
     borderColor: "#fff",
-    borderWidth: 2,
     borderRadius: 10,
     padding: 10,
     marginVertical: 10,
-    backgroundColor: "#ffffff90",
+    backgroundColor: "#fff",
     marginBottom: 20,
   },
   button: {
@@ -151,7 +145,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginVertical: 10,
-    borderColor: "#fff",
-    borderWidth: 1,
   },
 });
