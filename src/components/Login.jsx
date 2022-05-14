@@ -14,7 +14,7 @@ import { BlurView } from "expo-blur";
 import { CREAR_CUENTA } from "../services/auth";
 
 const uri =
-  "https://i.pinimg.com/474x/38/42/13/384213759bf0b9f87c48e31b0b767691--google-https-language.jpg";
+  "https://www.todofondos.net/wp-content/uploads/window-blue-wallpaper-temas-fondo-de-pantalla.jpg";
 const profilePicture =
   "https://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png";
 
@@ -33,7 +33,7 @@ export default function Login() {
   return (
     <View style={styles.container}>
       <Image source={{ uri }} style={[styles.image, StyleSheet.absoluteFill]} />
-      <View
+      {/* <View
         style={{
           width: 100,
           height: 100,
@@ -51,7 +51,7 @@ export default function Login() {
           borderRadius: 50,
           transform: [{ rotate: "45deg" }],
         }}
-      ></View>
+      ></View> */}
       <ScrollView
         contentContainerStyle={{
           flex: 1,
