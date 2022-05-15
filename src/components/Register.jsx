@@ -16,7 +16,7 @@ const backgroundImg = require("../../assets/fondo.jpg");
 
 const userImage = require("../../assets/usuario.png");
 
-export default function Login() {
+export default function Login({ navigation }) {
   const [user, setUser] = useState(0);
   const [passwd, setPasswd] = useState(0);
   const [newPass, setNewPass] = useState(0);
@@ -106,8 +106,14 @@ export default function Login() {
             <TouchableOpacity
               style={[
                 styles.button,
-                { backgroundColor: "#2166DF", height: 33, marginVertical: 30 },
+                {
+                  backgroundColor: "#2166DF",
+                  height: 33,
+                  marginVertical: 30,
+                  width: 200,
+                },
               ]}
+              onPress={() => navigation.navigate("Login")}
             >
               <Text style={{ fontSize: 17, fontWeight: "400", color: "white" }}>
                 Iniciar sesión

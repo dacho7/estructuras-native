@@ -17,13 +17,14 @@ const backgroundImg = require("../../assets/fondo.jpg");
 
 const userImage = require("../../assets/usuario.png");
 
-export default function Login() {
+export default function Login({ navigation }) {
   const [user, setUser] = useState(0);
   const [passwd, setPasswd] = useState(0);
 
   const handleSingIn = async () => {
     try {
       await LOGIN(user + "@gmail.com", passwd);
+      navigation.navigate("Dashboard");
       Alert.alert("Ingreso Exitoso");
     } catch (error) {
       Alert.alert("Usuario o contraseña incorrecta");
@@ -88,8 +89,14 @@ export default function Login() {
             <TouchableOpacity
               style={[
                 styles.button,
-                { backgroundColor: "#09D6E7", height: 33, marginVertical: 30 },
+                {
+                  backgroundColor: "#09D6E7",
+                  height: 33,
+                  marginVertical: 30,
+                  width: 200,
+                },
               ]}
+              onPress={() => navigation.navigate("Register")}
             >
               <Text style={{ fontSize: 17, fontWeight: "400", color: "white" }}>
                 Registrarme
