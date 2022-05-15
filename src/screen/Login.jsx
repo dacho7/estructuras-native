@@ -13,9 +13,9 @@ import {
 import { BlurView } from "expo-blur";
 import { LOGIN } from "../services/auth";
 
-const backgroundImg = require("../../assets/fondo.jpg");
+const backgroundImg = require("../../assets/background.jpg");
 
-const userImage = require("../../assets/usuario.png");
+const userImage = require("../../assets/user.png");
 
 export default function Login({ navigation }) {
   const [user, setUser] = useState(0);
