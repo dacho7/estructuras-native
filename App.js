@@ -5,8 +5,8 @@ import { LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Login from "./src/components/Login.jsx";
-import Register from "./src/components/Register.jsx";
+import Login from "./src/screen/Login.jsx";
+import Register from "./src/screen/Register.jsx";
 import Dashboard from "./src/screen/Dashboard.jsx";
 
 //ignore warn from firebase auth
@@ -28,7 +28,14 @@ export default function App() {
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="Dashboard" component={Dashboard} />
+        <Stack.Screen
+          options={{
+            headerLeft: null,
+            gesturesEnabled: false,
+          }}
+          name="Dashboard"
+          component={Dashboard}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -22,22 +22,20 @@ export default function Login({ navigation }) {
   const [newPass, setNewPass] = useState(0);
 
   const handleRegister = async () => {
-    try {
-      if (passwd !== newPass) {
-        Alert.alert("Las contraseñas no coinciden");
-      } else if (user.length < 3) {
-        Alert.alert("Debe ingresar un usuario valido");
-      } else if (passwd.length < 6) {
-        Alert.alert("La contraseñas debe tener mínimo 6 caracteres");
-      } else {
-        setUser("");
-        setPasswd("");
-        setNewPass("");
-        REGISTER_ACCOUNT(user + "@gmail.com", passwd);
-        Alert.alert("Usuario registrado con Exito");
+    if (passwd !== newPass) {
+      Alert.alert("Las contraseñas no coinciden");
+    } else if (user.length < 3) {
+      Alert.alert("Debe ingresar un usuario valido");
+    } else if (passwd.length < 6) {
+      Alert.alert("La contraseñas debe tener mínimo 6 caracteres");
+    } else {
+      try {
+        await REGISTER_ACCOUNT(user + "@gmail.com", passwd);
+        Alert.alert(`Usuario ${user} registrado con Exito!`);
+      } catch (error) {
+        console.log("ocrurio error", error);
+        Alert.alert("usuario ya registrado por favor ingrese otro");
       }
-    } catch (error) {
-      Alert.alert("Ocurrio algo, por favor intente nuevamente");
     }
   };
 
