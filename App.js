@@ -13,7 +13,6 @@ import Dashboard from "./src/screen/Dashboard.jsx";
 LogBox.ignoreLogs([
   "AsyncStorage has been extracted from react-native core and will be removed in a future release.",
 ]);
-LogBox.ignoreAllLogs();
 
 const Stack = createStackNavigator();
 
@@ -28,14 +27,7 @@ export default function App() {
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen
-          options={{
-            headerLeft: null,
-            gesturesEnabled: false,
-          }}
-          name="Dashboard"
-          component={Dashboard}
-        />
+        <Stack.Screen name="Dashboard" component={Dashboard} />
       </Stack.Navigator>
     </NavigationContainer>
   );
