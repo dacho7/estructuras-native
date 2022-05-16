@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -22,12 +22,23 @@ import PosteScreen from "../components/PosteScreen.jsx";
 import LineaScreen from "../components/LineaScreen.jsx";
 import RegistrosScreen from "../components/RegistrosScreen.jsx";
 import AcometidaScreen from "../components/AcometidaScreen.jsx";
+import { GET_NAME } from "../services/auth.js";
 
 const Drawer = createDrawerNavigator();
 
 export default function Dashboard() {
   const backgroundImg = require("../../assets/login-background.png");
   const userImage = require("../../assets/user.png");
+
+  const [user, setUser] = useState("");
+
+  const logout = async () => {
+    setUser(await GET_NAME());
+  };
+
+  const setName = async () => {
+    console.log("name");
+  };
 
   return (
     <Drawer.Navigator
@@ -38,7 +49,7 @@ export default function Dashboard() {
             source={backgroundImg}
           >
             <Image style={styles.sideMenuProfileIcon} source={userImage} />
-            <Text style={styles.name}>David</Text>
+            <Text style={styles.name}>{user}</Text>
           </ImageBackground>
           <DrawerContentScrollView style={{ flex: 1 }} {...props}>
             <DrawerItemList {...props} />
@@ -54,9 +65,10 @@ export default function Dashboard() {
                 style={{
                   flex: 1,
                   borderRadius: 20,
-                  backgroundColor: "#304CB5",
+                  backgroundColor: "#c1eff0",
                   color: "white",
                 }}
+                onPress={logout}
               />
             </View>
           </DrawerContentScrollView>
