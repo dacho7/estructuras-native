@@ -22,12 +22,11 @@ export default function Login({ navigation }) {
   const [passwd, setPasswd] = useState("");
 
   const handleSingIn = async () => {
+    const userLog = user.replace(" ", "_");
     try {
-      await LOGIN(user + "@gmail.com", passwd);
+      await LOGIN(userLog + "@gmail.com", passwd);
       navigation.navigate("Dashboard");
       Alert.alert("Ingreso Exitoso");
-      setUser("");
-      setPasswd("");
     } catch (error) {
       Alert.alert("Usuario o contraseña incorrecta");
     }
@@ -62,6 +61,7 @@ export default function Login({ navigation }) {
                 style={styles.input}
                 placeholder="Digite usuario"
                 onChangeText={(text) => setUser(text)}
+                value={user}
               ></TextInput>
             </View>
             <View>
@@ -75,6 +75,7 @@ export default function Login({ navigation }) {
                 placeholder="Digite contraseña"
                 onChangeText={(text) => setPasswd(text)}
                 secureTextEntry={true}
+                value={passwd}
               ></TextInput>
             </View>
             <TouchableOpacity

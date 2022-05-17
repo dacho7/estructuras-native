@@ -22,16 +22,19 @@ export default function Login({ navigation }) {
   const [newPass, setNewPass] = useState("");
 
   async function handleRegister() {
+    const userReg = user.replace(" ", "_");
     if (passwd !== newPass) {
       Alert.alert("Las contraseñas no coinciden");
-    } else if (user.length < 3) {
-      Alert.alert("Debe ingresar un usuario valido");
+    } else if (userReg.length < 3) {
+      Alert.alert("Nombre de usuario muy corto");
     } else if (passwd.length < 6) {
       Alert.alert("La contraseñas debe tener mínimo 6 caracteres");
+    } else if (userReg.includes("@")) {
+      Alert.alert("Nombre de usuario no valido");
     } else {
       try {
-        await REGISTER_ACCOUNT(user + "@gmail.com", passwd);
-        Alert.alert(`Usuario < ${user} > registrado con Exito!`);
+        await REGISTER_ACCOUNT(userReg + "@gmail.com", passwd);
+        Alert.alert(`Usuario < ${userReg} > registrado con Exito!`);
         setUser("");
         setPasswd("");
         setNewPass("");
@@ -70,6 +73,7 @@ export default function Login({ navigation }) {
                 style={styles.input}
                 placeholder="Ingrese nombre de usuario"
                 onChangeText={(text) => setUser(text)}
+                value={user}
               ></TextInput>
             </View>
             <View>
@@ -83,6 +87,7 @@ export default function Login({ navigation }) {
                 placeholder="Ingrese contraseña"
                 onChangeText={(text) => setPasswd(text)}
                 secureTextEntry={true}
+                value={passwd}
               ></TextInput>
             </View>
             <View>
@@ -91,6 +96,7 @@ export default function Login({ navigation }) {
                 placeholder="Repita contraseña"
                 onChangeText={(text) => setNewPass(text)}
                 secureTextEntry={true}
+                value={newPass}
               ></TextInput>
             </View>
             <TouchableOpacity
