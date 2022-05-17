@@ -21,20 +21,20 @@ export default function Login({ navigation }) {
   const [passwd, setPasswd] = useState("");
   const [newPass, setNewPass] = useState("");
 
-  async function handleRegister() {
-    const userReg = user.replace(" ", "_");
+  const handleRegister = async () => {
     if (passwd !== newPass) {
       Alert.alert("Las contraseñas no coinciden");
-    } else if (userReg.length < 3) {
+    } else if (user.trim().length < 3) {
       Alert.alert("Nombre de usuario muy corto");
-    } else if (passwd.length < 6) {
+    } else if (passwd.trim().length < 6) {
       Alert.alert("La contraseñas debe tener mínimo 6 caracteres");
-    } else if (userReg.includes("@")) {
+    } else if (user.includes("@")) {
       Alert.alert("Nombre de usuario no valido");
     } else {
       try {
+        const userReg = user.replace(" ", "_").trim();
         await REGISTER_ACCOUNT(userReg + "@gmail.com", passwd);
-        Alert.alert(`Usuario < ${userReg} > registrado con Exito!`);
+        Alert.alert(`Usuario < ${user} > registrado con Exito!`);
         setUser("");
         setPasswd("");
         setNewPass("");
@@ -43,7 +43,7 @@ export default function Login({ navigation }) {
         Alert.alert("usuario ya registrado por favor ingrese otro");
       }
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
