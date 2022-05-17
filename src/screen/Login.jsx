@@ -18,14 +18,16 @@ const backgroundImg = require("../../assets/background.jpg");
 const userImage = require("../../assets/user.png");
 
 export default function Login({ navigation }) {
-  const [user, setUser] = useState(0);
-  const [passwd, setPasswd] = useState(0);
+  const [user, setUser] = useState("");
+  const [passwd, setPasswd] = useState("");
 
   const handleSingIn = async () => {
     try {
       await LOGIN(user + "@gmail.com", passwd);
       navigation.navigate("Dashboard");
       Alert.alert("Ingreso Exitoso");
+      setUser("");
+      setPasswd("");
     } catch (error) {
       Alert.alert("Usuario o contraseña incorrecta");
     }

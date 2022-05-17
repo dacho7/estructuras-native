@@ -17,11 +17,11 @@ const backgroundImg = require("../../assets/background.jpg");
 const userImage = require("../../assets/user.png");
 
 export default function Login({ navigation }) {
-  const [user, setUser] = useState(0);
-  const [passwd, setPasswd] = useState(0);
-  const [newPass, setNewPass] = useState(0);
+  const [user, setUser] = useState("");
+  const [passwd, setPasswd] = useState("");
+  const [newPass, setNewPass] = useState("");
 
-  const handleRegister = async () => {
+  async function handleRegister() {
     if (passwd !== newPass) {
       Alert.alert("Las contraseñas no coinciden");
     } else if (user.length < 3) {
@@ -31,13 +31,16 @@ export default function Login({ navigation }) {
     } else {
       try {
         await REGISTER_ACCOUNT(user + "@gmail.com", passwd);
-        Alert.alert(`Usuario ${user} registrado con Exito!`);
+        Alert.alert(`Usuario < ${user} > registrado con Exito!`);
+        setUser("");
+        setPasswd("");
+        setNewPass("");
       } catch (error) {
         console.log("ocrurio error", error);
         Alert.alert("usuario ya registrado por favor ingrese otro");
       }
     }
-  };
+  }
 
   return (
     <View style={styles.container}>
