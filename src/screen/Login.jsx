@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { LOGIN } from "../services/auth";
+import {NOTIFICAR_ERROR} from "../generals/notificaciones";
 
 const backgroundImg = require("../../assets/background.jpg");
 
@@ -29,7 +30,8 @@ export default function Login({ navigation }) {
       setUser("");
       setPasswd("");
     } catch (error) {
-      Alert.alert("Usuario o contraseña incorrecta");
+      console.log(error)
+      await NOTIFICAR_ERROR(error);
     }
   };
 
