@@ -3,7 +3,7 @@ import React from "react";
 import { LogBox } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Login from "./src/screen/Login.jsx";
 import Register from "./src/screen/Register.jsx";
@@ -14,7 +14,7 @@ LogBox.ignoreLogs([
   "AsyncStorage has been extracted from react-native core and will be removed in a future release.",
 ]);
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (

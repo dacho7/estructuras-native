@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "estructuras-app",
-    "slug": "estructuras-app",
+    "name": "Levantamientos-app",
+    "slug": "Levantamientos-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,7 +23,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.dacho7.estructuras",
+      "package": "com.dacho7.levantamientos-app",
       "versionCode": 1
     },
     "web": {
