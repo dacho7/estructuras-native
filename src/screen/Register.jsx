@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { REGISTER_ACCOUNT } from "../services/auth";
+import {NOTIFICAR_ERROR} from "../generals/notificaciones";
 
 const backgroundImg = require("../../assets/background.jpg");
 
@@ -36,8 +37,7 @@ export default function Login({ navigation }) {
         setPasswd("");
         setNewPass("");
       } catch (error) {
-        console.log("ocrurio error", error);
-        Alert.alert("usuario ya registrado por favor ingrese otro");
+        await NOTIFICAR_ERROR(error.code);
       }
     }
   }

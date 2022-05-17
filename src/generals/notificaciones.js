@@ -2,15 +2,16 @@ import {Alert} from "react-native";
 
 export const NOTIFICAR_ERROR = async (codigo) => {
   if (codigo === "auth/email-already-in-use") {
-   Alert.alert("El correo ya está en uso");
+    console.log("entro")
+   Alert.alert("El usuario ya esta registrado");
   } else if (codigo === "auth/invalid-email") {
-    Alert.alert("Correo invalido");
+    Alert.alert("Usuario invalido");
   } else if (codigo === "auth/wrong-password") {
     Alert.alert("Contraseña incorrecta");
   } else if (codigo === "auth/user-not-found") {
-    Alert.alert("Contraseña incorrecta");
+    Alert.alert("Usuario no registrado");
   } else if (codigo === "auth/user-disabled") {
-    Alert.alert("Contraseña incorrecta");
+    Alert.alert("Usuario desahabilitado");
   } else if (codigo === "auth/admin-restricted-operation") {
     Alert.alert("Operación bloqueada!");
   } else if (codigo === "auth/network-request-failed") {

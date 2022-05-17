@@ -30,8 +30,7 @@ export default function Login({ navigation }) {
       setUser("");
       setPasswd("");
     } catch (error) {
-      console.log(error)
-      await NOTIFICAR_ERROR(error);
+      await NOTIFICAR_ERROR(error.code);
     }
   };
 
