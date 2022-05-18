@@ -24,11 +24,13 @@ export default function Login({ navigation }) {
 
   const handleSingIn = async () => {
     try {
-      await LOGIN(user + "@gmail.com", passwd);
-      navigation.navigate("Dashboard");
-      Alert.alert("Ingreso Exitoso");
-      setUser("");
-      setPasswd("");
+      const result = JSON.parse(JSON.stringify(await LOGIN(user + "@gmail.com", passwd)));
+      if (result._tokenResponse.idToken){
+        navigation.navigate("Dashboard");
+        Alert.alert("Ingreso Exitoso");
+        setUser("");
+        setPasswd("");
+      }
     } catch (error) {
       await NOTIFICAR_ERROR(error.code);
     }
