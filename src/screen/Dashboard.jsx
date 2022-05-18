@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -22,23 +22,30 @@ import PosteScreen from "../components/PosteScreen.jsx";
 import LineaScreen from "../components/LineaScreen.jsx";
 import RegistrosScreen from "../components/RegistrosScreen.jsx";
 import AcometidaScreen from "../components/AcometidaScreen.jsx";
-import { GET_NAME } from "../services/auth.js";
+import { GET_NAME, LOGOUT } from "../services/auth.js";
 
 const Drawer = createDrawerNavigator();
 
-export default function Dashboard() {
+export default function Dashboard({navigation}) {
   const backgroundImg = require("../../assets/login-background.png");
   const userImage = require("../../assets/user.png");
 
   const [user, setUser] = useState("");
 
   const logout = async () => {
-    setUser(await GET_NAME());
+    await LOGOUT();
+    navigation.navigate("Login")
   };
 
-  const setName = async () => {
-    console.log("name");
-  };
+  useEffect(() => {
+    const user = GET_NAME()
+    if(!user){
+      navigation.navigate("Login")
+      setUser("")
+    } else {
+      setUser(user)
+    }
+  }, [navigation])
 
   return (
     <Drawer.Navigator
