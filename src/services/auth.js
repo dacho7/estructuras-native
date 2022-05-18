@@ -13,4 +13,5 @@ export const LOGIN = async (email, passwd) =>
 
 export const LOGOUT = async () => await signOut(AUTH);
 
-export const GET_NAME =  async () => AUTH.currentUser.email.split("@")[0];
+export const GET_NAME = () =>
+  AUTH.currentUser.email.split("@")[0].replace("_", " ");

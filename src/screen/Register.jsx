@@ -22,16 +22,19 @@ export default function Login({ navigation }) {
   const [passwd, setPasswd] = useState("");
   const [newPass, setNewPass] = useState("");
 
-  async function handleRegister() {
+  const handleRegister = async () => {
     if (passwd !== newPass) {
       Alert.alert("Las contraseñas no coinciden");
-    } else if (user.length < 3) {
-      Alert.alert("Debe ingresar un usuario valido");
-    } else if (passwd.length < 6) {
+    } else if (user.trim().length < 3) {
+      Alert.alert("Nombre de usuario muy corto");
+    } else if (passwd.trim().length < 6) {
       Alert.alert("La contraseñas debe tener mínimo 6 caracteres");
+    } else if (user.includes("@")) {
+      Alert.alert("Nombre de usuario no valido");
     } else {
       try {
-        await REGISTER_ACCOUNT(user + "@gmail.com", passwd);
+        const userReg = user.replace(" ", "_").trim();
+        await REGISTER_ACCOUNT(userReg + "@gmail.com", passwd);
         Alert.alert(`Usuario < ${user} > registrado con Exito!`);
         setUser("");
         setPasswd("");
@@ -40,7 +43,7 @@ export default function Login({ navigation }) {
         await NOTIFICAR_ERROR(error.code);
       }
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -70,6 +73,7 @@ export default function Login({ navigation }) {
                 style={styles.input}
                 placeholder="Ingrese nombre de usuario"
                 onChangeText={(text) => setUser(text)}
+                value={user}
               ></TextInput>
             </View>
             <View>
@@ -83,6 +87,7 @@ export default function Login({ navigation }) {
                 placeholder="Ingrese contraseña"
                 onChangeText={(text) => setPasswd(text)}
                 secureTextEntry={true}
+                value={passwd}
               ></TextInput>
             </View>
             <View>
@@ -91,6 +96,7 @@ export default function Login({ navigation }) {
                 placeholder="Repita contraseña"
                 onChangeText={(text) => setNewPass(text)}
                 secureTextEntry={true}
+                value={newPass}
               ></TextInput>
             </View>
             <TouchableOpacity

@@ -74,9 +74,9 @@ export default function Dashboard() {
           </DrawerContentScrollView>
         </SafeAreaView>
       )}
-      initialRouteName="Conector"
+      initialRouteName="Reconectador"
     >
-      <Drawer.Screen name="Conector" component={ConectorScreen} />
+      <Drawer.Screen name="Reconectador" component={ConectorScreen} />
       <Drawer.Screen name="Seccionador" component={SeccionadoresScreen} />
       <Drawer.Screen name="Transformador" component={TransformadorScree} />
       <Drawer.Screen name="Poste" component={PosteScreen} />
