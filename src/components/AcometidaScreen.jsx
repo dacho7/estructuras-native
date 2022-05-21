@@ -1,24 +1,57 @@
-import React, {useState} from "react";
-import { StyleSheet, Text, TextInput, ScrollView, SafeAreaView, TouchableOpacity } from "react-native";
+import React from "react";
+import { StyleSheet, Text, TextInput, ScrollView, SafeAreaView, TouchableOpacity, Alert } from "react-native";
 import { AcometidaModel } from "../models/Acometida";
 
 export default function AcometidaScreen() {
 
-  const [fields, setFields] = useState(AcometidaModel[1])
-  const [databaseName, setDatabaseName] = useState(AcometidaModel[0])
+  const databaseDates= AcometidaModel[0]
+  const fields = AcometidaModel[1]
+  const values = {}
+
+  fields.forEach((val) => {
+    values[val.name] = ""
+  })
+
+  const cambiarValor = (valor,name) => {
+    values[name] = valor;
+  }
+
+  const validarCampos = () => {
+    let valid = true
+    Object.values(values).forEach((val) => {
+      if (val === ""){
+        valid = false
+      }
+    })
+    return valid
+  }
+
+  const registrarDatos = () => {
+    if(!validarCampos()){
+      Alert.alert("Por favor ingresar todos los datos")
+    } else{
+      Alert.alert("Exito")
+    }
+  }
 
   return (
     <SafeAreaView style={{ padding: 12 }}>
-      <ScrollView style={{ paddingTop: 12 }}>
+      <ScrollView style={{ marginTop: 12 }}>
         {
-          fields.map((e) => 
-            <TextInput placeholder={`Ingrese ${e.label}`}
-            style={styles.input}></TextInput>
+          fields.map((e, index) => 
+            <TextInput 
+              key={index}
+              placeholder={`Ingrese ${e.label}`}
+              style={styles.input}
+              value={values.name}
+              onChangeText={(text) => cambiarValor(text, e.name)}
+            ></TextInput>
           )
         }
         <TouchableOpacity style={styles.button}>
-          <Text style={{ fontWeight: "500", color: "white" }}>
-            Registrar {databaseName}
+          <Text style={{ fontWeight: "500", color: "white" }}
+          onPress={registrarDatos}>
+            {databaseDates.registerLabel}
           </Text>
         </TouchableOpacity>
       </ScrollView>

@@ -1,5 +1,5 @@
 export const AcometidaModel = [
-    ["acometida"],
+    {databaseName: "acometidas", registerLabel:"Registrar Acometida", updateLabel:"Actualizar Acometida"},
     [
         {name: "codigo", label:"Código",type: "string"},
         {name: "fases", label:"Fases", type:"list"},
