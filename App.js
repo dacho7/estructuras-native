@@ -12,6 +12,7 @@ import Dashboard from "./src/screen/Dashboard.jsx";
 //ignore warn from firebase auth
 LogBox.ignoreLogs([
   "AsyncStorage has been extracted from react-native core and will be removed in a future release.",
+  "Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.",
 ]);
 
 const Stack = createNativeStackNavigator();

@@ -5,7 +5,7 @@ export const AcometidaModel = [
     updateLabel: "Actualizar Acometida",
   },
   [
-    { name: "codigo", label: "Código", type: "string" },
+    { name: "codigo", label: "Código", type: "string", format: "numeric" },
     {
       name: "fases",
       label: "Fases",
@@ -66,10 +66,31 @@ export const AcometidaModel = [
       name: "fecha_levantamiento",
       label: "Fecha de Levantamiento",
       type: "date",
+      format: "birthdate-full",
     },
-    { name: "latitud_niu", label: "Latitud-Niu", type: "real" },
-    { name: "longitud_niu", label: "Longitu-Niu", type: "real" },
-    { name: "latitud_poste", label: "Latitud-Poste", type: "real" },
-    { name: "longitud_poste", label: "longitud-Poste", type: "real" },
+    {
+      name: "latitud_niu",
+      label: "Latitud-Niu",
+      type: "real",
+      format: "decimal-pad",
+    },
+    {
+      name: "longitud_niu",
+      label: "Longitu-Niu",
+      type: "real",
+      format: "decimal-pad",
+    },
+    {
+      name: "latitud_poste",
+      label: "Latitud-Poste",
+      type: "real",
+      format: "decimal-pad",
+    },
+    {
+      name: "longitud_poste",
+      label: "longitud-Poste",
+      type: "real",
+      format: "decimal-pad",
+    },
   ],
 ];

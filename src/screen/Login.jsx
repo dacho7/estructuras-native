@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { LOGIN } from "../services/auth";
-import {NOTIFICAR_ERROR} from "../generals/notificaciones";
+import { NOTIFICAR_ERROR } from "../generals/notificaciones";
 
 const backgroundImg = require("../../assets/background.jpg");
 
@@ -24,8 +24,10 @@ export default function Login({ navigation }) {
 
   const handleSingIn = async () => {
     try {
-      const result = JSON.parse(JSON.stringify(await LOGIN(user + "@gmail.com", passwd)));
-      if (result._tokenResponse.idToken){
+      const result = JSON.parse(
+        JSON.stringify(await LOGIN(user + "@gmail.com", passwd))
+      );
+      if (result._tokenResponse.idToken) {
         navigation.navigate("Dashboard");
         Alert.alert("Ingreso Exitoso");
         setUser("");

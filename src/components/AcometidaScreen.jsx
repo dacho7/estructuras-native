@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,20 +7,25 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Alert,
+  View,
 } from "react-native";
 
 import RNPickerSelect from "react-native-picker-select";
+import { MonthDateYearField } from "react-native-datefield";
+
+import { REGISTER_MOVEMENT } from "../generals/functions";
 
 import { AcometidaModel } from "../models/Acometida";
-import { GUARDAR } from "../services/crud";
 
 export default function AcometidaScreen() {
   const databaseDates = AcometidaModel[0];
   const fields = AcometidaModel[1];
-  const values = {};
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState("date");
+  let values = {};
 
   fields.forEach((val) => {
-    values[val.name] = "asdasd";
+    values[val.name] = "";
   });
 
   const cambiarValor = (valor, name) => {
@@ -30,7 +35,6 @@ export default function AcometidaScreen() {
   const validarCampos = () => {
     values["fecha_levantamiento"] = new Date();
     let valid = true;
-    console.log(values);
     Object.values(values).forEach((val) => {
       if (val === "") {
         valid = false;
@@ -43,9 +47,10 @@ export default function AcometidaScreen() {
     if (!validarCampos()) {
       Alert.alert("Por favor ingresar todos los datos");
     } else {
-      const result = await GUARDAR(databaseDates.databaseName, values);
-      console.log(result);
-      Alert.alert("Exito");
+      values.description = `${databaseDates.databaseName}-${values.codigo}`;
+      await REGISTER_MOVEMENT(databaseDates.databaseName, values);
+      values = {};
+      Alert.alert("Exito al registrar");
     }
   };
 
@@ -61,16 +66,27 @@ export default function AcometidaScreen() {
                 style={styles.input}
                 value={values.name}
                 onChangeText={(text) => cambiarValor(text, e.name)}
+                keyboardType={e.format}
+                autoComplete={e.date}
               ></TextInput>
             );
-          }
-          if (e.type === "list") {
+          } else if (e.type === "list") {
             return (
               <RNPickerSelect
                 style={styles.input}
                 key={index}
                 onValueChange={(value) => cambiarValor(value, e.name)}
                 items={e.values}
+              />
+            );
+          } else if (e.type === "date") {
+            return (
+              <MonthDateYearField
+                labelDate="Día"
+                labelMonth="Mes"
+                labelYear="Año"
+                containerStyle={styles.containerStyle}
+                onSubmit={(value) => cambiarValor(value, e.name)}
               />
             );
           }
@@ -99,6 +115,16 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   input: {
+    width: "90%",
+    height: 40,
+    borderColor: "#fff",
+    borderRadius: 10,
+    padding: 10,
+    backgroundColor: "#fff",
+    marginBottom: 8,
+    alignSelf: "center",
+  },
+  containerStyle: {
     width: "90%",
     height: 40,
     borderColor: "#fff",

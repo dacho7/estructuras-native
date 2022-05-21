@@ -22,11 +22,11 @@ import PosteScreen from "../components/PosteScreen.jsx";
 import LineaScreen from "../components/LineaScreen.jsx";
 import RegistrosScreen from "../components/RegistrosScreen.jsx";
 import AcometidaScreen from "../components/AcometidaScreen.jsx";
-import { GET_NAME, LOGOUT } from "../services/auth.js";
+import { GET_NAME, IS_USER_AUTH, LOGOUT } from "../services/auth.js";
 
 const Drawer = createDrawerNavigator();
 
-export default function Dashboard({navigation}) {
+export default function Dashboard({ navigation }) {
   const backgroundImg = require("../../assets/login-background.png");
   const userImage = require("../../assets/user.png");
 
@@ -34,8 +34,12 @@ export default function Dashboard({navigation}) {
 
   const logout = async () => {
     await LOGOUT();
-    navigation.navigate("Login")
+    navigation.navigate("Login");
   };
+
+  useState(() => {
+    IS_USER_AUTH(navigation).then((alg) => console.log(alg));
+  });
 
   return (
     <Drawer.Navigator
