@@ -12,6 +12,7 @@ import {
 import RNPickerSelect from "react-native-picker-select";
 
 import { AcometidaModel } from "../models/Acometida";
+import { GUARDAR } from "../services/crud";
 
 export default function AcometidaScreen() {
   const databaseDates = AcometidaModel[0];
@@ -19,7 +20,7 @@ export default function AcometidaScreen() {
   const values = {};
 
   fields.forEach((val) => {
-    values[val.name] = "";
+    values[val.name] = "asdasd";
   });
 
   const cambiarValor = (valor, name) => {
@@ -27,7 +28,9 @@ export default function AcometidaScreen() {
   };
 
   const validarCampos = () => {
+    values["fecha_levantamiento"] = new Date();
     let valid = true;
+    console.log(values);
     Object.values(values).forEach((val) => {
       if (val === "") {
         valid = false;
@@ -36,10 +39,12 @@ export default function AcometidaScreen() {
     return valid;
   };
 
-  const registrarDatos = () => {
+  const registrarDatos = async () => {
     if (!validarCampos()) {
       Alert.alert("Por favor ingresar todos los datos");
     } else {
+      const result = await GUARDAR(databaseDates.databaseName, values);
+      console.log(result);
       Alert.alert("Exito");
     }
   };
@@ -64,7 +69,7 @@ export default function AcometidaScreen() {
               <RNPickerSelect
                 style={styles.input}
                 key={index}
-                onValueChange={(value) => cambiarValor(text, e.name)}
+                onValueChange={(value) => cambiarValor(value, e.name)}
                 items={e.values}
               />
             );
