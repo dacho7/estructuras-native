@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { REGISTER_ACCOUNT } from "../services/auth";
-import {NOTIFICAR_ERROR} from "../generals/notificaciones";
+import { NOTIFICAR_ERROR } from "../generals/notificaciones";
 
 const backgroundImg = require("../../assets/background.jpg");
 
@@ -36,6 +36,7 @@ export default function Login({ navigation }) {
         const userReg = user.replace(" ", "_").trim();
         await REGISTER_ACCOUNT(userReg + "@gmail.com", passwd);
         Alert.alert(`Usuario < ${user} > registrado con Exito!`);
+        navigation.navigate("Dashboard");
         setUser("");
         setPasswd("");
         setNewPass("");

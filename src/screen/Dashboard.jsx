@@ -37,16 +37,6 @@ export default function Dashboard({navigation}) {
     navigation.navigate("Login")
   };
 
-  useEffect(() => {
-    const user = GET_NAME()
-    if(!user){
-      navigation.navigate("Login")
-      setUser("")
-    } else {
-      setUser(user)
-    }
-  }, [navigation])
-
   return (
     <Drawer.Navigator
       drawerContent={(props) => (
