@@ -11,7 +11,7 @@ import {
 } from "react-native";
 
 import RNPickerSelect from "react-native-picker-select";
-import { MonthDateYearField } from "react-native-datefield";
+import DateField from "react-native-datefield";
 
 import { REGISTER_MOVEMENT } from "../generals/functions";
 
@@ -81,7 +81,7 @@ export default function AcometidaScreen() {
             );
           } else if (e.type === "date") {
             return (
-              <MonthDateYearField
+              <DateField
                 labelDate="Día"
                 labelMonth="Mes"
                 labelYear="Año"
