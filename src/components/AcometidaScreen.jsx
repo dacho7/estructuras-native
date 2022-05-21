@@ -64,9 +64,9 @@ export default function AcometidaScreen() {
               <RNPickerSelect
                 style={styles.input}
                 key={index}
-                onValueChange={(value) => console.log(e)}
+                onValueChange={(value) => cambiarValor(text, e.name)}
                 items={e.values}
-              ></RNPickerSelect>
+              />
             );
           }
         })}
