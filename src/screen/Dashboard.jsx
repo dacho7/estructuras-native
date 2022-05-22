@@ -40,7 +40,7 @@ export default function Dashboard({ navigation }) {
   };
 
   useState(() => {
-    IS_USER_AUTH(navigation).then(() => console.log("log_ing"));
+    IS_USER_AUTH(navigation, setUser).then(() => console.log("log_ing"));
   });
 
   return (

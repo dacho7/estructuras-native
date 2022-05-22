@@ -16,11 +16,11 @@ export const LOGOUT = async () => await signOut(AUTH);
 
 export const GET_NAME = async () => await AUTH.currentUser.email.split("@")[0];
 
-export const IS_USER_AUTH = async (navigation) =>
+export const IS_USER_AUTH = async (navigation, setUser) =>
   onAuthStateChanged(AUTH, (user) => {
     if (user) {
-      const uid = user.uid;
-      return uid;
+      const email = user.email;
+      setUser(email.split("@")[0].replace("_", " "));
     } else {
       navigation.navigate("Login");
     }
