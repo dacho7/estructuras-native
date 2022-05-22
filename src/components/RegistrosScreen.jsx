@@ -1,10 +1,79 @@
-import React from "react";
-import { Button, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { LISTAR } from "../services/crud";
 
 export default function RegistrosScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Button title="Go back home" />
-    </View>
-  );
+  const [elements, setElements] = useState([]);
+
+  useEffect(() => {
+    getDates();
+  }, []);
+
+  const getDates = async () => {
+    const res = await LISTAR("movements");
+    const elem = [];
+    res.forEach((val) => {
+      elem.push(val.data());
+    });
+    setElements(elem);
+  };
+
+  return elements.map((val, index) => {
+    return (
+      <View style={{ marginTop: 20 }} key={index}>
+        <View style={styles.container}>
+          <View style={styles.square}>
+            <Text style={styles.font}>{val.type}</Text>
+          </View>
+          <View style={styles.square}>
+            <Text style={styles.font}>{val.description}</Text>
+          </View>
+          <View style={styles.square}>
+            <Text style={styles.font}>
+              {new Date(
+                val.created_at.seconds * 1000 +
+                  val.created_at.nanoseconds / 1000000
+              ).toLocaleDateString()}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.container}>
+          <View style={styles.square2}>
+            <Text style={styles.font}>Editar</Text>
+          </View>
+          <View style={styles.square2}>
+            <Text style={styles.font}>Eliminar</Text>
+          </View>
+        </View>
+      </View>
+    );
+  });
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 3,
+    justifyContent: "center",
+    flexDirection: "row",
+  },
+  square: {
+    backgroundColor: "#c1eff0",
+    width: "33%",
+    height: 50,
+    margin: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  square2: {
+    backgroundColor: "#c1eff0",
+    width: "50%",
+    height: 40,
+    margin: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  font: {
+    fontSize: 17,
+    fontWeight: "400",
+  },
+});

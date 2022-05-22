@@ -20,8 +20,6 @@ import { AcometidaModel } from "../models/Acometida";
 export default function AcometidaScreen() {
   const databaseDates = AcometidaModel[0];
   const fields = AcometidaModel[1];
-  const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState("date");
   let values = {};
 
   fields.forEach((val) => {
@@ -48,6 +46,7 @@ export default function AcometidaScreen() {
       Alert.alert("Por favor ingresar todos los datos");
     } else {
       values.description = `${databaseDates.databaseName}-${values.codigo}`;
+      console.log(values.codigo);
       await REGISTER_MOVEMENT(databaseDates.databaseName, values);
       values = {};
       Alert.alert("Exito al registrar");
@@ -85,17 +84,15 @@ export default function AcometidaScreen() {
                 labelDate="Día"
                 labelMonth="Mes"
                 labelYear="Año"
+                key={index}
                 containerStyle={styles.containerStyle}
                 onSubmit={(value) => cambiarValor(value, e.name)}
               />
             );
           }
         })}
-        <TouchableOpacity style={styles.button}>
-          <Text
-            style={{ fontWeight: "500", color: "white" }}
-            onPress={registrarDatos}
-          >
+        <TouchableOpacity style={styles.button} onPress={registrarDatos}>
+          <Text style={{ fontWeight: "500", color: "white" }}>
             {databaseDates.registerLabel}
           </Text>
         </TouchableOpacity>
