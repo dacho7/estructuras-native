@@ -7,7 +7,6 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Alert,
-  View,
 } from "react-native";
 
 import RNPickerSelect from "react-native-picker-select";
@@ -15,26 +14,23 @@ import DateField from "react-native-datefield";
 
 import { REGISTER_MOVEMENT } from "../generals/functions";
 
-import { AcometidaModel } from "../models/Acometida";
+export default function RegisterElement(props) {
+  const databaseDates = props.model[0];
+  const fields = props.model[1];
+  const [values, setValues] = useState({});
 
-export default function AcometidaScreen() {
-  const databaseDates = AcometidaModel[0];
-  const fields = AcometidaModel[1];
-  let values = {};
-
-  fields.forEach((val) => {
-    values[val.name] = "";
-  });
-
-  const cambiarValor = (valor, name) => {
-    values[name] = valor;
+  const changeValue = (valor, name) => {
+    setValues({ ...values, [name]: valor });
   };
 
   const validarCampos = () => {
-    values["fecha_levantamiento"] = new Date();
     let valid = true;
-    Object.values(values).forEach((val) => {
-      if (val === "") {
+    Object.values(fields).forEach((val) => {
+      if (
+        values[val.name] === undefined ||
+        values[val.name] === null ||
+        values[val.name] === ""
+      ) {
         valid = false;
       }
     });
@@ -46,9 +42,8 @@ export default function AcometidaScreen() {
       Alert.alert("Por favor ingresar todos los datos");
     } else {
       values.description = `${databaseDates.databaseName}-${values.codigo}`;
-      console.log(values.codigo);
       await REGISTER_MOVEMENT(databaseDates.databaseName, values);
-      values = {};
+      setValues({});
       Alert.alert("Exito al registrar");
     }
   };
@@ -63,8 +58,8 @@ export default function AcometidaScreen() {
                 key={index}
                 placeholder={`Ingrese ${e.label}`}
                 style={styles.input}
-                value={values.name}
-                onChangeText={(text) => cambiarValor(text, e.name)}
+                value={values[e.name]}
+                onChangeText={(text) => changeValue(text, e.name)}
                 keyboardType={e.format}
                 autoComplete={e.date}
               ></TextInput>
@@ -74,8 +69,9 @@ export default function AcometidaScreen() {
               <RNPickerSelect
                 style={styles.input}
                 key={index}
-                onValueChange={(value) => cambiarValor(value, e.name)}
+                onValueChange={(text) => changeValue(text, e.name)}
                 items={e.values}
+                value={values[e.name]}
               />
             );
           } else if (e.type === "date") {
@@ -85,8 +81,9 @@ export default function AcometidaScreen() {
                 labelMonth="Mes"
                 labelYear="Año"
                 key={index}
+                value={values[e.name]}
                 containerStyle={styles.containerStyle}
-                onSubmit={(value) => cambiarValor(value, e.name)}
+                onSubmit={(text) => changeValue(text, e.name)}
               />
             );
           }

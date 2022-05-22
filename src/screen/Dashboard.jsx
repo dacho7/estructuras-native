@@ -21,8 +21,10 @@ import TransformadorScree from "../components/TransformadorScree.jsx";
 import PosteScreen from "../components/PosteScreen.jsx";
 import LineaScreen from "../components/LineaScreen.jsx";
 import RegistrosScreen from "../components/RegistrosScreen.jsx";
-import AcometidaScreen from "../components/AcometidaScreen.jsx";
+import RegisterElement from "../components/RegisterElement.jsx";
 import { GET_NAME, IS_USER_AUTH, LOGOUT } from "../services/auth.js";
+
+import { AcometidaModel } from "../models/Acometida";
 
 const Drawer = createDrawerNavigator();
 
@@ -38,7 +40,7 @@ export default function Dashboard({ navigation }) {
   };
 
   useState(() => {
-    IS_USER_AUTH(navigation).then((alg) => console.log(alg));
+    IS_USER_AUTH(navigation).then(() => console.log("log_ing"));
   });
 
   return (
@@ -82,7 +84,9 @@ export default function Dashboard({ navigation }) {
       <Drawer.Screen name="Transformador" component={TransformadorScree} />
       <Drawer.Screen name="Poste" component={PosteScreen} />
       <Drawer.Screen name="Linea" component={LineaScreen} />
-      <Drawer.Screen name="Acometida" component={AcometidaScreen} />
+      <Drawer.Screen name="Acometida">
+        {(props) => <RegisterElement {...props} model={AcometidaModel} />}
+      </Drawer.Screen>
       <Drawer.Screen name="Mis Registros" component={RegistrosScreen} />
     </Drawer.Navigator>
   );
