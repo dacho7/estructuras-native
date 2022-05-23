@@ -10,13 +10,13 @@ export const AcometidaModel = [
       name: "fases",
       label: "Fases",
       type: "list",
-      values: [{ label: "XXX", value: "xxx" }],
+      values: [{ label: "NO data", value: "NO data" }],
     },
     {
       name: "transformador",
       label: "Transformador",
       type: "list",
-      values: [{ label: "XXX", value: "xxx" }],
+      values: [{ label: "NO data", value: "NO data" }],
     },
     {
       name: "circuito",
@@ -44,13 +44,13 @@ export const AcometidaModel = [
       name: "conductor",
       label: "Conductor",
       type: "list",
-      values: [{ label: "XXX", value: "xxx" }],
+      values: [{ label: "NO data", value: "NO data" }],
     },
     {
       name: "neutro",
       label: "Neutro",
       type: "list",
-      values: [{ label: "XXX", value: "xxx" }],
+      values: [{ label: "NO data", value: "NO data" }],
     },
     {
       name: "poblacion",

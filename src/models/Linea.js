@@ -7,7 +7,7 @@ export const LineaModel = [
   [
     { name: "codigo", label: "Código", type: "string", format: "numeric" },
     {
-      name: "descripccion",
+      name: "descripcion",
       label: "Descripción",
       type: "strin",
       format: "string",

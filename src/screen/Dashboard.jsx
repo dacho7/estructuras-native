@@ -15,17 +15,17 @@ import {
   DrawerItem,
 } from "@react-navigation/drawer";
 
-import ConectorScreen from "../components/ConectorScreen.jsx";
-import SeccionadoresScreen from "../components/SeccionadoresScreen.jsx";
-import TransformadorScree from "../components/TransformadorScree.jsx";
-import PosteScreen from "../components/PosteScreen.jsx";
-import LineaScreen from "../components/LineaScreen.jsx";
-import RegistrosScreen from "../components/RegistrosScreen.jsx";
 import RegisterElement from "../components/RegisterElement.jsx";
+import RegistrosScreen from "../components/RegistrosScreen.jsx";
+
 import { IS_USER_AUTH, LOGOUT } from "../services/auth.js";
 
+import { ReconectadorModel } from "../models/Reconectador.js";
 import { AcometidaModel } from "../models/Acometida";
 import { LineaModel } from "../models/Linea.js";
+import { SeccionadorModel } from "../models/Seccionador.js";
+import { TransformadorModel } from "../models/Transformador.js";
+import { PostesModel } from "../models/Postes.js";
 
 const Drawer = createDrawerNavigator();
 
@@ -65,7 +65,7 @@ export default function Dashboard({ navigation }) {
               }}
             >
               <DrawerItem
-                label="Log out"
+                label="Cerrar sesión"
                 style={{
                   flex: 1,
                   borderRadius: 20,
@@ -80,17 +80,29 @@ export default function Dashboard({ navigation }) {
       )}
       initialRouteName="Reconectador"
     >
-      <Drawer.Screen name="Reconectador" component={ConectorScreen} />
-      <Drawer.Screen name="Seccionador" component={SeccionadoresScreen} />
-      <Drawer.Screen name="Transformador" component={TransformadorScree} />
-      <Drawer.Screen name="Poste" component={PosteScreen} />
+      <Drawer.Screen name="Reconectador">
+        {(props) => <RegisterElement {...props} model={ReconectadorModel} />}
+      </Drawer.Screen>
+      <Drawer.Screen name="Seccionador">
+        {(props) => <RegisterElement {...props} model={SeccionadorModel} />}
+      </Drawer.Screen>
+      <Drawer.Screen name="Transformador">
+        {(props) => <RegisterElement {...props} model={TransformadorModel} />}
+      </Drawer.Screen>
+      <Drawer.Screen name="Poste">
+        {(props) => <RegisterElement {...props} model={PostesModel} />}
+      </Drawer.Screen>
+
       <Drawer.Screen name="Linea">
         {(props) => <RegisterElement {...props} model={LineaModel} />}
       </Drawer.Screen>
       <Drawer.Screen name="Acometida">
         {(props) => <RegisterElement {...props} model={AcometidaModel} />}
       </Drawer.Screen>
-      <Drawer.Screen name="Mis Registros" component={RegistrosScreen} />
+      <Drawer.Screen
+        name="Mis Registros"
+        component={RegistrosScreen}
+      ></Drawer.Screen>
     </Drawer.Navigator>
   );
 }
