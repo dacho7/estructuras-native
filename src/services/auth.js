@@ -14,8 +14,6 @@ export const LOGIN = async (email, passwd) =>
 
 export const LOGOUT = async () => await signOut(AUTH);
 
-export const GET_NAME = async () => await AUTH.currentUser.email.split("@")[0];
-
 export const IS_USER_AUTH = async (navigation, setUser) =>
   onAuthStateChanged(AUTH, (user) => {
     if (user) {

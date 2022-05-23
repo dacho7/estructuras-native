@@ -22,9 +22,10 @@ import PosteScreen from "../components/PosteScreen.jsx";
 import LineaScreen from "../components/LineaScreen.jsx";
 import RegistrosScreen from "../components/RegistrosScreen.jsx";
 import RegisterElement from "../components/RegisterElement.jsx";
-import { GET_NAME, IS_USER_AUTH, LOGOUT } from "../services/auth.js";
+import { IS_USER_AUTH, LOGOUT } from "../services/auth.js";
 
 import { AcometidaModel } from "../models/Acometida";
+import { LineaModel } from "../models/Linea.js";
 
 const Drawer = createDrawerNavigator();
 
@@ -83,7 +84,9 @@ export default function Dashboard({ navigation }) {
       <Drawer.Screen name="Seccionador" component={SeccionadoresScreen} />
       <Drawer.Screen name="Transformador" component={TransformadorScree} />
       <Drawer.Screen name="Poste" component={PosteScreen} />
-      <Drawer.Screen name="Linea" component={LineaScreen} />
+      <Drawer.Screen name="Linea">
+        {(props) => <RegisterElement {...props} model={LineaModel} />}
+      </Drawer.Screen>
       <Drawer.Screen name="Acometida">
         {(props) => <RegisterElement {...props} model={AcometidaModel} />}
       </Drawer.Screen>
