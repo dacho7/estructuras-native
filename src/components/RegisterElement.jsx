@@ -52,7 +52,7 @@ export default function RegisterElement(props) {
     <SafeAreaView style={{ padding: 12 }}>
       <ScrollView style={{ marginTop: 12 }}>
         {fields.map((e, index) => {
-          if (e.type === "string" || e.type === "real") {
+          if (e.type === "string" || e.type === "real" || e.type === "int") {
             return (
               <TextInput
                 key={index}
