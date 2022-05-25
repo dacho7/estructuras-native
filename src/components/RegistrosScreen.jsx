@@ -18,11 +18,11 @@ export default function RegistrosScreen() {
 
   const getDates = async () => {
     const res = await LISTAR("movements");
-    const elem = [];
-    res.forEach((val) => {
-      elem.push(val.data());
-    });
-    setElements(elem);
+    setElements(res);
+  };
+
+  const eliminarRegistro = (id) => {
+    console.log(id);
   };
 
   return (
@@ -52,7 +52,12 @@ export default function RegistrosScreen() {
                   <Text style={styles.font}>Editar</Text>
                 </View>
                 <View style={styles.square2}>
-                  <Text style={styles.font}>Eliminar</Text>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => eliminarRegistro(val.id)}
+                  >
+                    <Text style={styles.font}>Eliminar</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             </View>

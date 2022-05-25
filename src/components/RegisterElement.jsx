@@ -9,7 +9,6 @@ import {
   Alert,
 } from "react-native";
 
-import RNPickerSelect from "react-native-picker-select";
 import DateField from "react-native-datefield";
 
 import { REGISTER_MOVEMENT } from "../generals/functions";
@@ -52,7 +51,12 @@ export default function RegisterElement(props) {
     <SafeAreaView style={{ padding: 12 }}>
       <ScrollView style={{ marginTop: 12 }}>
         {fields.map((e, index) => {
-          if (e.type === "string" || e.type === "real" || e.type === "int") {
+          if (
+            e.type === "string" ||
+            e.type === "real" ||
+            e.type === "int" ||
+            e.type === "list2"
+          ) {
             return (
               <TextInput
                 key={index}
@@ -61,23 +65,12 @@ export default function RegisterElement(props) {
                 value={values[e.name]}
                 onChangeText={(text) => changeValue(text, e.name)}
                 keyboardType={e.format}
-                autoComplete={e.date}
               ></TextInput>
-            );
-          } else if (e.type === "list") {
-            return (
-              <RNPickerSelect
-                style={styles.input}
-                key={index}
-                onValueChange={(text) => changeValue(text, e.name)}
-                items={e.values}
-                value={values[e.name]}
-              />
             );
           } else if (e.type === "date") {
             return (
               <DateField
-                labelDate="Día"
+                labelDate="Dia"
                 labelMonth="Mes"
                 labelYear="Año"
                 key={index}
