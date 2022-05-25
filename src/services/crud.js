@@ -15,14 +15,24 @@ import { AUTH } from "./config";
 
 export const LISTAR = async (colection) => {
   const coleccion = collection(FIRESTORE, colection);
-  const usuarioId = AUTH?.currentUser.uid;
-  const consulta = query(coleccion, where("uid", "==", usuarioId));
-  const datosConsulta = await getDocs(consulta);
-  let datos = [];
-  datosConsulta.forEach((val) => {
-    datos.push({ ...val.data(), mov_id: val.id });
-  });
-  return datos.sort((a, b) => a.created_at > b.created_at);
+  if (AUTH.currentUser.email === "admin@gmail.com") {
+    const consulta = query(coleccion, orderBy("created_at", "desc"));
+    const datosConsulta = await getDocs(consulta);
+    let datos = [];
+    datosConsulta.forEach((val) => {
+      datos.push({ ...val.data(), mov_id: val.id });
+    });
+    return datos;
+  } else {
+    const usuarioId = AUTH?.currentUser.uid;
+    const consulta = query(coleccion, where("uid", "==", usuarioId));
+    const datosConsulta = await getDocs(consulta);
+    let datos = [];
+    datosConsulta.forEach((val) => {
+      datos.push({ ...val.data(), mov_id: val.id });
+    });
+    return datos.sort((a, b) => a.created_at > b.created_at);
+  }
 };
 
 export const GUARDAR = async (colection, datos) => {
