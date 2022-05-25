@@ -2,6 +2,8 @@
 import React, { useEffect } from "react";
 import { LogBox } from "react-native";
 
+import { NOTIFICAR_ERROR } from "./src/generals/notificaciones.js";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -9,7 +11,6 @@ import Login from "./src/screen/Login.jsx";
 import Register from "./src/screen/Register.jsx";
 import Dashboard from "./src/screen/Dashboard.jsx";
 import DashboardAdmin from "./src/screen/DashboardAdmin.jsx";
-import { useEffect } from "react/cjs/react.production.min";
 
 //ignore warn from firebase auth
 LogBox.ignoreLogs([
