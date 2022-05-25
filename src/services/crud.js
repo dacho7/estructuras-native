@@ -8,19 +8,31 @@ import {
   orderBy,
   query,
   setDoc,
+  where,
 } from "firebase/firestore";
 import { FIRESTORE } from "./config";
+import { AUTH } from "./config";
 
 export const LISTAR = async (colection) => {
   const coleccion = collection(FIRESTORE, colection);
-  const consulta = query(coleccion, orderBy("created_at", "desc"));
-  return await getDocs(consulta);
+  const usuarioId = AUTH?.currentUser.uid;
+  const consulta = query(coleccion, where("uid", "==", usuarioId));
+  const datosConsulta = await getDocs(consulta);
+  let datos = [];
+  datosConsulta.forEach((val) => {
+    datos.push(val.data());
+  });
+  return datos.sort((a, b) => a.created_at > b.created_at);
 };
 
 export const GUARDAR = async (colection, datos) => {
-  datos.created_at = new Date();
-  datos.updated_at = new Date();
-  return await addDoc(collection(FIRESTORE, colection), datos);
+  const usuarioId = AUTH?.currentUser.uid;
+  if (usuarioId) {
+    datos.created_at = new Date();
+    datos.updated_at = new Date();
+    datos.uid = usuarioId;
+    return await addDoc(collection(FIRESTORE, colection), datos);
+  }
 };
 
 export const BUSCAR = async (colection, id) =>

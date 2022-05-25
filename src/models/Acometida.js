@@ -9,19 +9,19 @@ export const AcometidaModel = [
     {
       name: "fases",
       label: "Fases",
-      type: "list",
+      type: "list2",
       values: [{ label: "NO data", value: "NO data" }],
     },
     {
       name: "transformador",
       label: "Transformador",
-      type: "list",
+      type: "list2",
       values: [{ label: "NO data", value: "NO data" }],
     },
     {
       name: "circuito",
       label: "Circuito",
-      type: "list",
+      type: "list2",
       values: [
         { label: "CP12", value: "CP12" },
         { label: "CP13", value: "CP13" },
@@ -43,19 +43,19 @@ export const AcometidaModel = [
     {
       name: "conductor",
       label: "Conductor",
-      type: "list",
+      type: "list2",
       values: [{ label: "NO data", value: "NO data" }],
     },
     {
       name: "neutro",
       label: "Neutro",
-      type: "list",
+      type: "list2",
       values: [{ label: "NO data", value: "NO data" }],
     },
     {
       name: "poblacion",
       label: "Población",
-      type: "list",
+      type: "list2",
       values: [
         { label: "Urbano", value: "Urbano" },
         { label: "Rural", value: "Rural" },

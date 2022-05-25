@@ -29,7 +29,7 @@ export const TransformadorModel = [
     {
       name: "propiedad",
       label: "Propiedad",
-      type: "list",
+      type: "list2",
       values: [
         { label: "ALCALDIA", value: "ALCALDIA" },
         { label: "GOBERNACIÓN", value: "GOBERNACIÓN" },
@@ -97,7 +97,6 @@ export const TransformadorModel = [
       label: "Departamento",
       type: "string",
     },
-
     {
       name: "marca",
       label: "Marca",

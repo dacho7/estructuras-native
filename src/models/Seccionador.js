@@ -19,7 +19,7 @@ export const SeccionadorModel = [
     {
       name: "fases",
       label: "Fases",
-      type: "list",
+      type: "list2",
       values: [
         { label: "A", value: "A" },
         { label: "B", value: "B" },
@@ -29,20 +29,20 @@ export const SeccionadorModel = [
     {
       name: "circuito",
       label: "Circuito",
-      type: "list",
+      type: "list2",
       values: [{ label: "Sin Datos", value: "Sin Datos" }],
     },
 
     {
       name: "kv",
       label: "Voltaje Nominal",
-      type: "list",
+      type: "list2",
       values: [{ label: "Sin Datos", value: "Sin Datos" }],
     },
     {
       name: "amp",
       label: "Corriente Nominal",
-      type: "list",
+      type: "list2",
       values: [{ label: "Sin Datos", value: "Sin Datos" }],
     },
     {
@@ -53,7 +53,7 @@ export const SeccionadorModel = [
     {
       name: "estado",
       label: "Estado",
-      type: "list",
+      type: "list2",
       values: [
         { label: "Bueno", value: "Bueno" },
         { label: "Regular", value: "Regular" },
@@ -69,7 +69,7 @@ export const SeccionadorModel = [
     {
       name: "monotipo",
       label: "Monotipo",
-      type: "list",
+      type: "list2",
       values: [
         { label: "Trifásico", value: "Trifásico" },
         { label: "Monofásico", value: "Monofásico" },

@@ -20,7 +20,7 @@ export const ReconectadorModel = [
     {
       name: "propiedad",
       label: "Propiedad",
-      type: "list",
+      type: "list2",
       values: [
         { label: "ALCALDIA", value: "ALCALDIA" },
         { label: "GOBERNACIÓN", value: "GOBERNACIÓN" },
@@ -38,25 +38,19 @@ export const ReconectadorModel = [
     {
       name: "fases",
       label: "Fases",
-      type: "list",
-      values: [{ label: "Sin datos", value: "Sin datos" }],
-    },
-    {
-      name: "fases",
-      label: "Fases",
-      type: "list",
+      type: "list2",
       values: [{ label: "Sin datos", value: "Sin datos" }],
     },
     {
       name: "fparent",
       label: "FParent",
-      type: "list",
+      type: "list2",
       values: [{ label: "Sin datos", value: "Sin datos" }],
     },
     {
       name: "tparent",
       label: "TParent",
-      type: "list",
+      type: "list2",
       values: [{ label: "Sin datos", value: "Sin datos" }],
     },
     {
@@ -74,13 +68,13 @@ export const ReconectadorModel = [
     {
       name: "uc",
       label: "Unidad Constructiva",
-      type: "list",
+      type: "list2",
       values: [{ label: "Sin datos", value: "Sin datos" }],
     },
     {
       name: "material",
       label: "Material",
-      type: "list",
+      type: "list2",
       values: [{ label: "Sin datos", value: "Sin datos" }],
     },
     {
@@ -96,7 +90,7 @@ export const ReconectadorModel = [
     {
       name: "poblacion",
       label: "Población",
-      type: "list",
+      type: "list2",
       values: [
         { label: "Urbano", value: "Urbano" },
         { label: "Rural", value: "Rural" },
