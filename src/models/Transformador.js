@@ -71,11 +71,6 @@ export const TransformadorModel = [
       type: "int",
     },
     {
-      name: "islight",
-      label: "ISLIGHT",
-      type: "int",
-    },
-    {
       name: "latitud",
       label: "Latitud",
       type: "real",

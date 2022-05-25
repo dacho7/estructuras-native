@@ -40,21 +40,25 @@ export const LineaModel = [
       name: "tparent",
       label: "TParent",
       type: "string",
+      format: "numeric",
     },
     {
       name: "fparent",
       label: "FParent",
       type: "string",
+      format: "numeric",
     },
     {
       name: "conductor",
       label: "Conductor",
       type: "string",
+      format: "string",
     },
     {
       name: "neutro",
       label: "Neutro",
       type: "string",
+      format: "string",
     },
     {
       name: "longitud1",
