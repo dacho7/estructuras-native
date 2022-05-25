@@ -27,11 +27,21 @@ export default function Login({ navigation }) {
       const result = JSON.parse(
         JSON.stringify(await LOGIN(user + "@gmail.com", passwd))
       );
+
       if (result._tokenResponse.idToken) {
-        navigation.navigate("Dashboard");
-        Alert.alert("Ingreso Exitoso");
-        setUser("");
-        setPasswd("");
+        if (result._tokenResponse.email === "admin@gmail.com") {
+          console.log("soy admin");
+          navigation.navigate("DashboardAdmin");
+          Alert.alert("Ingreso Exitoso");
+          setUser("");
+          setPasswd("");
+        } else {
+          console.log("no soy admin");
+          navigation.navigate("Dashboard");
+          Alert.alert("Ingreso Exitoso");
+          setUser("");
+          setPasswd("");
+        }
       }
     } catch (error) {
       await NOTIFICAR_ERROR(error.code);
