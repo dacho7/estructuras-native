@@ -20,7 +20,7 @@ export const LISTAR = async (colection) => {
   const datosConsulta = await getDocs(consulta);
   let datos = [];
   datosConsulta.forEach((val) => {
-    datos.push(val.data());
+    datos.push({ ...val.data(), mov_id: val.id });
   });
   return datos.sort((a, b) => a.created_at > b.created_at);
 };
@@ -38,8 +38,8 @@ export const GUARDAR = async (colection, datos) => {
 export const BUSCAR = async (colection, id) =>
   await getDoc(doc(FIRESTORE, colection, id));
 
-export const ELIMINAR = async (colection, objeto) =>
-  await deleteDoc(doc(FIRESTORE, colection, objeto.id));
+export const ELIMINAR = async (colection, id) =>
+  await deleteDoc(doc(FIRESTORE, colection, id));
 
 export const EDITAR = async (colection, id, datos) => {
   datos.updated_at = new Date();

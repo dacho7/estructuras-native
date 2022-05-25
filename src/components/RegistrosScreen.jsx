@@ -6,8 +6,11 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from "react-native";
-import { LISTAR } from "../services/crud";
+import { LISTAR, ELIMINAR } from "../services/crud";
+
+import { ELIMINAR_REGISTRO } from "../generals/functions";
 
 export default function RegistrosScreen() {
   const [elements, setElements] = useState([]);
@@ -21,8 +24,24 @@ export default function RegistrosScreen() {
     setElements(res);
   };
 
-  const eliminarRegistro = (id) => {
-    console.log(id);
+  const eliminarRegistro = (obj) => {
+    Alert.alert(
+      "Esta seguro de eliminar este registro?",
+      `Registro ${obj.description}`,
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Eliminar",
+          onPress: async () => {
+            await ELIMINAR_REGISTRO(obj);
+            getDates();
+          },
+        },
+      ]
+    );
   };
 
   return (
@@ -54,7 +73,7 @@ export default function RegistrosScreen() {
                 <View style={styles.square2}>
                   <TouchableOpacity
                     style={styles.button}
-                    onPress={() => eliminarRegistro(val.id)}
+                    onPress={() => eliminarRegistro(val)}
                   >
                     <Text style={styles.font}>Eliminar</Text>
                   </TouchableOpacity>
