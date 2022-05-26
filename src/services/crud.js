@@ -10,6 +10,9 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
+import { Alert } from "react-native";
+import NetInfo from "@react-native-community/netinfo";
+
 import { FIRESTORE } from "./config";
 import { AUTH } from "./config";
 
@@ -36,12 +39,17 @@ export const LISTAR = async (colection) => {
 };
 
 export const GUARDAR = async (colection, datos) => {
-  const usuarioId = AUTH?.currentUser.uid;
-  if (usuarioId) {
-    datos.created_at = new Date();
-    datos.updated_at = new Date();
-    datos.uid = usuarioId;
-    return await addDoc(collection(FIRESTORE, colection), datos);
+  const netStatus = await NetInfo.fetch();
+  if (netStatus.isConnected) {
+    const usuarioId = AUTH?.currentUser.uid;
+    if (usuarioId) {
+      datos.created_at = new Date();
+      datos.updated_at = new Date();
+      datos.uid = usuarioId;
+      return await addDoc(collection(FIRESTORE, colection), datos);
+    }
+  } else {
+    Alert.alert("Internet not connected.!!!");
   }
 };
 

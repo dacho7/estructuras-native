@@ -1,8 +1,6 @@
 //import { StatusBar } from "expo-status-bar";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { LogBox } from "react-native";
-
-import { NOTIFICAR_ERROR } from "./src/generals/notificaciones.js";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -11,6 +9,8 @@ import Login from "./src/screen/Login.jsx";
 import Register from "./src/screen/Register.jsx";
 import Dashboard from "./src/screen/Dashboard.jsx";
 import DashboardAdmin from "./src/screen/DashboardAdmin.jsx";
+
+import { db } from "./src/services/sqlite";
 
 //ignore warn from firebase auth
 LogBox.ignoreLogs([
@@ -21,35 +21,26 @@ LogBox.ignoreLogs([
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [text, setText] = useState("datonuevo");
+  const [forceUpdate, forceUpdateId] = useForceUpdate();
+
   useEffect(() => {
-    handleSingIn();
-  }, []);
-
-  const handleSingIn = async () => {
-    try {
-      const result = JSON.parse(
-        JSON.stringify(await LOGIN(user + "@gmail.com", passwd))
+    db.transaction((tx) => {
+      tx.executeSql(
+        "create table if not exists items (id integer primary key not null, done int, value text);"
       );
-
-      if (result._tokenResponse.idToken) {
-        if (result._tokenResponse.email === "admin@gmail.com") {
-          console.log("soy admin");
-          navigation.navigate("DashboardAdmin");
-          Alert.alert("Ingreso Exitoso");
-          setUser("");
-          setPasswd("");
-        } else {
-          console.log("no soy admin");
-          navigation.navigate("Dashboard");
-          Alert.alert("Ingreso Exitoso");
-          setUser("");
-          setPasswd("");
-        }
-      }
-    } catch (error) {
-      await NOTIFICAR_ERROR(error.code);
-    }
-  };
+    });
+    db.transaction(
+      (tx) => {
+        tx.executeSql("insert into items (done, value) values (0, ?)", [text]);
+        tx.executeSql("select * from items", [], (_, { rows }) =>
+          console.log(JSON.stringify(rows))
+        );
+      },
+      null,
+      forceUpdate
+    );
+  }, []);
 
   return (
     <NavigationContainer>
@@ -66,4 +57,9 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
+}
+
+function useForceUpdate() {
+  const [value, setValue] = useState(0);
+  return [() => setValue(value + 1), value];
 }
