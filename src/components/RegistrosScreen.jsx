@@ -7,10 +7,13 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  Image,
 } from "react-native";
 import { LISTAR, ELIMINAR } from "../services/crud";
 
 import { ELIMINAR_REGISTRO } from "../generals/functions";
+
+const refresh_ico = require("../../assets/refresh-icon.png");
 
 export default function RegistrosScreen() {
   const [elements, setElements] = useState([]);
@@ -46,6 +49,9 @@ export default function RegistrosScreen() {
 
   return (
     <SafeAreaView>
+      <TouchableOpacity style={styles.button} onPress={getDates}>
+        <Image source={refresh_ico} style={styles.refresh} />
+      </TouchableOpacity>
       <ScrollView>
         {elements.map((val, index) => {
           return (
@@ -112,5 +118,13 @@ const styles = StyleSheet.create({
   font: {
     fontSize: 17,
     fontWeight: "400",
+  },
+  refresh: {
+    width: 60,
+    height: 60,
+    margin: 5,
+    marginTop: 10,
+    alignSelf: "flex-end",
+    marginRight: 15,
   },
 });
