@@ -48,11 +48,7 @@ export const SINCRONIZAR_DATOS = async () => {
           await REGISTER_MOVEMENT(item.coleccion, par);
         }
       });
-      txn.executeSql(
-        "delete from estructuras where 1=1",
-        [],
-        async (sqlTxn, res) => console.log("datos eliminados")
-      );
+      txn.executeSql("delete from estructuras where 1=1", []);
     });
   }
 };

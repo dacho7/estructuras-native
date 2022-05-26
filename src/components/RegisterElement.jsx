@@ -58,7 +58,6 @@ export default function RegisterElement(props) {
     setAllValues(dates);
     const vals = {};
     fields.forEach((val) => {
-      console.log(val.name);
       if (val.type === "date") {
         const time =
           dates[val.name].seconds * 1000 +

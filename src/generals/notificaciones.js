@@ -2,7 +2,6 @@ import { Alert } from "react-native";
 
 export const NOTIFICAR_ERROR = async (codigo) => {
   if (codigo === "auth/email-already-in-use") {
-    console.log("entro");
     Alert.alert("El usuario ya esta registrado");
   } else if (codigo === "auth/invalid-email") {
     Alert.alert("Usuario invalido");
