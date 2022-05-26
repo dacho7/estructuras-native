@@ -1,5 +1,5 @@
 import { ToastAndroid, Alert } from "react-native";
-import { ELIMINAR, GUARDAR, EDITAR, IN_ONLINE } from "../services/crud";
+import { ELIMINAR, GUARDAR, EDITAR, IN_ONLINE, BUSCAR } from "../services/crud";
 import { db } from "../services/sqlite";
 import { AcometidaModel } from "../models/Acometida.js";
 import { LineaModel } from "../models/Linea.js";
@@ -62,14 +62,25 @@ export const ELIMINAR_REGISTRO = async (datos) => {
   await ELIMINAR("movements", datos.mov_id);
 };
 
-export const EDITAR_REGISTRO = async (colecction, datos, id, idmov) => {
+export const EDITAR_REGISTRO = async (
+  colecction,
+  datos,
+  id,
+  idmov,
+  allValues
+) => {
   if ((await IN_ONLINE()).isConnected) {
-    await EDITAR(colecction, id, datos);
-    await EDITAR("movements", idmov, {
-      id,
-      type: colecction,
-      description: datos.description,
+    Object.keys(allValues).forEach((key) => {
+      if (!datos[key]) {
+        datos[key] = allValues[key];
+      }
     });
+    const allMov = await BUSCAR("movements", idmov);
+    allMov.updated_at = new Date();
+    datos.description = colecction + "-" + datos.codigo;
+    allMov.description = datos.description;
+    await EDITAR(colecction, id, datos);
+    await EDITAR("movements", idmov, allMov);
     ToastAndroid.show("Registro exitoso", ToastAndroid.SHORT);
   } else {
     ToastAndroid.show("Debes tener conexión internet", ToastAndroid.SHORT);

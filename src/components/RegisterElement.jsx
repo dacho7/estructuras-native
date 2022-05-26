@@ -17,11 +17,12 @@ import { BUSCAR } from "../services/crud";
 
 export default function RegisterElement(props) {
   const databaseDates = props.model[0];
-  const [show, setShow] = useState(false);
   const fields = props.model[1];
+  const [show, setShow] = useState(false);
   const [values, setValues] = useState({});
   const [id, setId] = useState({});
   const [idMov, setMov] = useState("");
+  const [allValues, setAllValues] = useState({});
 
   useEffect(() => {
     if (props.datosEditar) {
@@ -54,6 +55,7 @@ export default function RegisterElement(props) {
 
   const getDatesFromExist = async (colection, id) => {
     const dates = await BUSCAR(colection, id);
+    setAllValues(dates);
     const vals = {};
     fields.forEach((val) => {
       console.log(val.name);
@@ -98,7 +100,13 @@ export default function RegisterElement(props) {
   };
 
   const actualizarDatos = async () => {
-    await EDITAR_REGISTRO(databaseDates.databaseName, values, id, idMov);
+    await EDITAR_REGISTRO(
+      databaseDates.databaseName,
+      values,
+      id,
+      idMov,
+      allValues
+    );
   };
 
   return (
