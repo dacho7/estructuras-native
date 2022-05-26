@@ -12,6 +12,7 @@ import {
 import DateField from "react-native-datefield";
 
 import { REGISTER_MOVEMENT } from "../generals/functions";
+import { BUSCAR } from "../services/crud";
 
 export default function RegisterElement(props) {
   const databaseDates = props.model[0];
@@ -19,10 +20,22 @@ export default function RegisterElement(props) {
   const [values, setValues] = useState({});
 
   useEffect(() => {
-    if (props.elemento !== undefined) {
-      console.log(props.elemento);
+    if (props.datosEditar) {
+      getDates(props.datosEditar.type, props.datosEditar.id);
+    } else {
+      setValues({});
     }
   }, []);
+
+  const getDates = async (colection, id) => {
+    const dates = await BUSCAR(colection, id);
+    const values = {};
+    fields.forEach((val) => {
+      values[val.name] = dates[val.name];
+    });
+    console.log(values);
+    setValues(values);
+  };
 
   const changeValue = (valor, name) => {
     setValues({ ...values, [name]: valor });

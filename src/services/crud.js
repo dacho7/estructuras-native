@@ -11,23 +11,13 @@ import {
   where,
 } from "firebase/firestore";
 
-import react, { useState } from "react";
-import { Alert } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
-
-import { db } from "./sqlite";
 
 import { FIRESTORE } from "./config";
 import { AUTH } from "./config";
 
 export const IN_ONLINE = async () => await NetInfo.fetch();
 
-let datos3 = [];
-
-const asignar = (asignara) => {
-  datos3 = asignara;
-  return datos3;
-};
 export const LISTAR = async (colection) => {
   const coleccion = collection(FIRESTORE, colection);
   if (AUTH.currentUser.email === "admin@gmail.com") {
@@ -61,7 +51,8 @@ export const GUARDAR = async (colection, datos) => {
 };
 
 export const BUSCAR = async (colection, id) => {
-  await getDoc(doc(FIRESTORE, colection, id));
+  const result = await getDoc(doc(FIRESTORE, colection, id));
+  if (result.exists()) return result.data();
 };
 
 export const ELIMINAR = async (colection, id) => {

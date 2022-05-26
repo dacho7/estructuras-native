@@ -49,8 +49,7 @@ export default function RegistrosScreen(props) {
   };
 
   const editarRegistro = (obj) => {
-    console.log(obj);
-    //props.navigate.navigate("Edit");
+    props.navigate.navigate("Edit", obj);
   };
 
   return (

@@ -42,7 +42,7 @@ export const AcometidaModel = [
         { label: "CP46", value: "CP46" },
       ],
     },
-    { name: "nodo", label: "Nodo-Poste", type: "string", format: "string" },
+    { name: "nodo", label: "Nodo-Poste", type: "string", format: "default" },
     {
       name: "conductor",
       label: "Conductor",
@@ -68,11 +68,11 @@ export const AcometidaModel = [
         { label: "Centro", value: "Poblado" },
       ],
     },
-    {
-      name: "fecha_levantamiento",
-      label: "Fecha de Levantamiento",
-      type: "date",
-    },
+    // {
+    //   name: "fecha_levantamiento",
+    //   label: "Fecha de Levantamiento",
+    //   type: "date",
+    // },
     {
       name: "latitud_niu",
       label: "Latitud-Niu",
