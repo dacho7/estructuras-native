@@ -44,7 +44,6 @@ export default function RegisterElement(props) {
       values.description = `${databaseDates.databaseName}-${values.codigo}`;
       await REGISTER_MOVEMENT(databaseDates.databaseName, values, forceUpdate);
       setValues({});
-      Alert.alert("Exito al registrar");
     }
   };
 

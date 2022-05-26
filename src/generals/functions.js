@@ -11,22 +11,24 @@ export const REGISTER_MOVEMENT = async (colecction, datos, forceUpdate) => {
       description: datos.description,
     });
   } else {
-    console.log("se va a registrar sin conexion");
     db.transaction(
       (tx) => {
         tx.executeSql(
           "insert into estructuras (coleccion, value) values (?, ?)",
           [colecction, JSON.stringify(datos)],
           (sqlTxn, res) => {
-            console.log(`${JSON.stringify(datos)} agregado correcto`);
+            console.log("Se registro");
+            Alert.alert(
+              "Exito, registro temporal, tus datos se deben sincronizar con internet!"
+            );
           },
           (error) => {
             Alert.alert("Algo fallo, intente nuevamente");
           }
         );
-        tx.executeSql("select * from estructuras", [], (sqlTxn, res) => {
-          console.log(res.rows);
-        });
+        // tx.executeSql("select * from estructuras", [], (sqlTxn, res) => {
+        //   console.log(res.rows);
+        // });
       },
       null,
       forceUpdate
