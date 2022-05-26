@@ -1,12 +1,37 @@
-import { ELIMINAR, GUARDAR } from "../services/crud";
+import { Alert } from "react-native";
+import { ELIMINAR, GUARDAR, IN_ONLINE } from "../services/crud";
+import { db } from "../services/sqlite";
 
-export const REGISTER_MOVEMENT = async (colecction, datos) => {
-  const res = await GUARDAR(colecction, datos);
-  await GUARDAR("movements", {
-    id: res.id,
-    type: colecction,
-    description: datos.description,
-  });
+export const REGISTER_MOVEMENT = async (colecction, datos, forceUpdate) => {
+  if (!(await IN_ONLINE()).isConnected) {
+    const res = await GUARDAR(colecction, datos);
+    await GUARDAR("movements", {
+      id: res.id,
+      type: colecction,
+      description: datos.description,
+    });
+  } else {
+    console.log("se va a registrar sin conexion");
+    db.transaction(
+      (tx) => {
+        tx.executeSql(
+          "insert into estructuras (coleccion, value) values (?, ?)",
+          [colecction, JSON.stringify(datos)],
+          (sqlTxn, res) => {
+            console.log(`${JSON.stringify(datos)} agregado correcto`);
+          },
+          (error) => {
+            Alert.alert("Algo fallo, intente nuevamente");
+          }
+        );
+        tx.executeSql("select * from estructuras", [], (sqlTxn, res) => {
+          console.log(res.rows);
+        });
+      },
+      null,
+      forceUpdate
+    );
+  }
 };
 
 export const ELIMINAR_REGISTRO = async (datos) => {

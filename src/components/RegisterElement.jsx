@@ -17,6 +17,7 @@ export default function RegisterElement(props) {
   const databaseDates = props.model[0];
   const fields = props.model[1];
   const [values, setValues] = useState({});
+  const [forceUpdate, forceUpdateId] = useForceUpdate();
 
   const changeValue = (valor, name) => {
     setValues({ ...values, [name]: valor });
@@ -41,7 +42,7 @@ export default function RegisterElement(props) {
       Alert.alert("Por favor ingresar todos los datos");
     } else {
       values.description = `${databaseDates.databaseName}-${values.codigo}`;
-      await REGISTER_MOVEMENT(databaseDates.databaseName, values);
+      await REGISTER_MOVEMENT(databaseDates.databaseName, values, forceUpdate);
       setValues({});
       Alert.alert("Exito al registrar");
     }
@@ -84,6 +85,11 @@ export default function RegisterElement(props) {
       </ScrollView>
     </SafeAreaView>
   );
+}
+
+function useForceUpdate() {
+  const [value, setValue] = useState(0);
+  return [() => setValue(value + 1), value];
 }
 
 const styles = StyleSheet.create({

@@ -24,7 +24,8 @@ export default function RegistrosScreen() {
 
   const getDates = async () => {
     const res = await LISTAR("movements");
-    setElements(res);
+    console.log("res", res);
+    //setElements(res);
   };
 
   const eliminarRegistro = (obj) => {
