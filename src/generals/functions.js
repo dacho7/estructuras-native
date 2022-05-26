@@ -1,4 +1,4 @@
-import { Alert } from "react-native";
+import { ToastAndroid, Alert } from "react-native";
 import { ELIMINAR, GUARDAR, IN_ONLINE } from "../services/crud";
 import { db } from "../services/sqlite";
 import { AcometidaModel } from "../models/Acometida.js";
@@ -9,14 +9,18 @@ import { SeccionadorModel } from "../models/Seccionador.js";
 import { TransformadorModel } from "../models/Transformador";
 
 export const REGISTER_MOVEMENT = async (colecction, datos) => {
-  if ((await IN_ONLINE()).isConnected) {
+  if (!(await IN_ONLINE()).isConnected) {
     const res = await GUARDAR(colecction, datos);
     await GUARDAR("movements", {
       id: res.id,
       type: colecction,
       description: datos.description,
     });
-    Alert.alert("Registro exitoso");
+    ToastAndroid.showWithGravity(
+      "Registro exitoso",
+      ToastAndroid.SHORT,
+      ToastAndroid.TOP
+    );
   } else {
     db.transaction((tx) => {
       tx.executeSql(
@@ -42,14 +46,13 @@ export const SINCRONIZAR_DATOS = async () => {
         for (const item of res.rows._array) {
           const par = await JSON.parse(item.value);
           await REGISTER_MOVEMENT(item.coleccion, par);
-          console.log("Se registro de db local");
         }
       });
-
       txn.executeSql(
         "delete from estructuras where 1=1",
         [],
-        async (sqlTxn, res) => Alert.alert("Tus datos estan sincronizados")
+        async (sqlTxn, res) =>
+          ToastAndroid.show("Tus datos estan sincronizados", ToastAndroid.TOP)
       );
     });
   }
