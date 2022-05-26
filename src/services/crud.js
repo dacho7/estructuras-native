@@ -28,40 +28,25 @@ const asignar = (asignara) => {
   datos3 = asignara;
   return datos3;
 };
-
 export const LISTAR = async (colection) => {
-  if (!(await IN_ONLINE()).isConnected) {
-    const coleccion = collection(FIRESTORE, colection);
-    if (AUTH.currentUser.email === "admin@gmail.com") {
-      const consulta = query(coleccion, orderBy("created_at", "desc"));
-      const datosConsulta = await getDocs(consulta);
-      let datos = [];
-      datosConsulta.forEach((val) => {
-        datos.push({ ...val.data(), mov_id: val.id });
-      });
-      return datos;
-    } else {
-      const usuarioId = AUTH?.currentUser.uid;
-      const consulta = query(coleccion, where("uid", "==", usuarioId));
-      const datosConsulta = await getDocs(consulta);
-      let datos = [];
-      datosConsulta.forEach((val) => {
-        datos.push({ ...val.data(), mov_id: val.id });
-      });
-      return datos.sort((a, b) => a.created_at > b.created_at);
-    }
-  } else {
-    db.transaction((txn) => {
-      txn.executeSql("select * from estructuras", [], async (sqlTxn, res) => {
-        const datos = [];
-        for (const item of res.rows._array) {
-          const par = await JSON.parse(item.value);
-          datos.push(par);
-        }
-        asignar(datos);
-      });
+  const coleccion = collection(FIRESTORE, colection);
+  if (AUTH.currentUser.email === "admin@gmail.com") {
+    const consulta = query(coleccion, orderBy("created_at", "desc"));
+    const datosConsulta = await getDocs(consulta);
+    let datos = [];
+    datosConsulta.forEach((val) => {
+      datos.push({ ...val.data(), mov_id: val.id });
     });
-    return asignar(datos3);
+    return datos;
+  } else {
+    const usuarioId = AUTH?.currentUser.uid;
+    const consulta = query(coleccion, where("uid", "==", usuarioId));
+    const datosConsulta = await getDocs(consulta);
+    let datos = [];
+    datosConsulta.forEach((val) => {
+      datos.push({ ...val.data(), mov_id: val.id });
+    });
+    return datos.sort((a, b) => a.created_at < b.created_at);
   }
 };
 

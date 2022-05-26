@@ -6,8 +6,8 @@ export const PostesModel = [
   },
   [
     {
-      name: "direccion",
-      label: "Dirección",
+      name: "codigo",
+      label: "Codigo",
       type: "string",
       format: "default",
     },

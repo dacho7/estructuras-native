@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { LISTAR, ELIMINAR } from "../services/crud";
 
-import { ELIMINAR_REGISTRO } from "../generals/functions";
+import { ELIMINAR_REGISTRO, SINCRONIZAR_DATOS } from "../generals/functions";
 
 const refresh_ico = require("../../assets/refresh-icon.png");
 
@@ -23,9 +23,9 @@ export default function RegistrosScreen() {
   }, []);
 
   const getDates = async () => {
+    await SINCRONIZAR_DATOS();
     const res = await LISTAR("movements");
-    console.log("res", res);
-    //setElements(res);
+    setElements(res);
   };
 
   const eliminarRegistro = (obj) => {
