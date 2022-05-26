@@ -11,6 +11,7 @@ import Dashboard from "./src/screen/Dashboard.jsx";
 import DashboardAdmin from "./src/screen/DashboardAdmin.jsx";
 
 import { db } from "./src/services/sqlite";
+import Edit from "./src/screen/Edit.jsx";
 
 //ignore warn from firebase auth
 LogBox.ignoreLogs([
@@ -49,6 +50,7 @@ export default function App() {
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="DashboardAdmin" component={DashboardAdmin} />
+        <Stack.Screen name="Edit" component={Edit} />
       </Stack.Navigator>
     </NavigationContainer>
   );

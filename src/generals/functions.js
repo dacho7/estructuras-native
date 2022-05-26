@@ -25,9 +25,6 @@ export const REGISTER_MOVEMENT = async (colecction, datos) => {
           Alert.alert("Algo fallo, intente nuevamente");
         }
       );
-      // tx.executeSql("select * from estructuras", [], (sqlTxn, res) => {
-      //   console.log(res.rows);
-      // });
     });
   }
 };

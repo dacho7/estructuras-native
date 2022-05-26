@@ -15,7 +15,7 @@ import { ELIMINAR_REGISTRO, SINCRONIZAR_DATOS } from "../generals/functions";
 
 const refresh_ico = require("../../assets/refresh-icon.png");
 
-export default function RegistrosScreen() {
+export default function RegistrosScreen(props) {
   const [elements, setElements] = useState([]);
 
   useEffect(() => {
@@ -48,6 +48,11 @@ export default function RegistrosScreen() {
     );
   };
 
+  const editarRegistro = (obj) => {
+    console.log(obj);
+    //props.navigate.navigate("Edit");
+  };
+
   return (
     <SafeAreaView>
       <TouchableOpacity style={styles.button} onPress={getDates}>
@@ -75,7 +80,12 @@ export default function RegistrosScreen() {
               </View>
               <View style={styles.container}>
                 <View style={styles.square2}>
-                  <Text style={styles.font}>Editar</Text>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => editarRegistro(val)}
+                  >
+                    <Text style={styles.font}>Editar</Text>
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.square2}>
                   <TouchableOpacity

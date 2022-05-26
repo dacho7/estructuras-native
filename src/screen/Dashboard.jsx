@@ -98,10 +98,9 @@ export default function Dashboard({ navigation }) {
       <Drawer.Screen name="Acometida">
         {(props) => <RegisterElement {...props} model={AcometidaModel} />}
       </Drawer.Screen>
-      <Drawer.Screen
-        name="Mis Registros"
-        component={RegistrosScreen}
-      ></Drawer.Screen>
+      <Drawer.Screen name="Mis Registros">
+        {(props) => <RegistrosScreen {...props} navigate={navigation} />}
+      </Drawer.Screen>
     </Drawer.Navigator>
   );
 }

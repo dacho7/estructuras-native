@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -17,6 +17,12 @@ export default function RegisterElement(props) {
   const databaseDates = props.model[0];
   const fields = props.model[1];
   const [values, setValues] = useState({});
+
+  useEffect(() => {
+    if (props.elemento !== undefined) {
+      console.log(props.elemento);
+    }
+  }, []);
 
   const changeValue = (valor, name) => {
     setValues({ ...values, [name]: valor });
