@@ -8,7 +8,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Alert,
+  ToastAndroid,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { LOGIN } from "../services/auth";
@@ -30,15 +30,13 @@ export default function Login({ navigation }) {
 
       if (result._tokenResponse.idToken) {
         if (result._tokenResponse.email === "admin@gmail.com") {
-          console.log("soy admin");
           navigation.navigate("DashboardAdmin");
-          Alert.alert("Ingreso Exitoso");
+          ToastAndroid.show("Ingreso Exitoso", ToastAndroid.SHORT);
           setUser("");
           setPasswd("");
         } else {
-          console.log("no soy admin");
           navigation.navigate("Dashboard");
-          Alert.alert("Ingreso Exitoso");
+          ToastAndroid.show("Ingreso Exitoso", ToastAndroid.SHORT);
           setUser("");
           setPasswd("");
         }
