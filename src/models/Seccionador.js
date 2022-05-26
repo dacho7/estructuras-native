@@ -10,16 +10,19 @@ export const SeccionadorModel = [
       name: "descripcion",
       label: "Descripción",
       type: "string",
+      format: "default",
     },
     {
       name: "direccion",
       label: "Dirección",
       type: "string",
+      format: "default",
     },
     {
       name: "fases",
       label: "Fases",
-      type: "list2",
+      type: "string",
+      format: "default",
       values: [
         { label: "A", value: "A" },
         { label: "B", value: "B" },
@@ -29,31 +32,36 @@ export const SeccionadorModel = [
     {
       name: "circuito",
       label: "Circuito",
-      type: "list2",
+      type: "string",
+      format: "default",
       values: [{ label: "Sin Datos", value: "Sin Datos" }],
     },
 
     {
       name: "kv",
       label: "Voltaje Nominal",
-      type: "list2",
+      type: "string",
+      format: "default",
       values: [{ label: "Sin Datos", value: "Sin Datos" }],
     },
     {
       name: "amp",
       label: "Corriente Nominal",
-      type: "list2",
+      type: "string",
+      format: "default",
       values: [{ label: "Sin Datos", value: "Sin Datos" }],
     },
     {
       name: "tipo",
       label: "Tipo Seccionador",
-      type: "int",
+      type: "real",
+      format: "numeric",
     },
     {
       name: "estado",
       label: "Estado",
-      type: "list2",
+      type: "string",
+      format: "default",
       values: [
         { label: "Bueno", value: "Bueno" },
         { label: "Regular", value: "Regular" },
@@ -64,12 +72,12 @@ export const SeccionadorModel = [
       name: "date_instalacion",
       label: "Fecha de Instalación",
       type: "date",
-      format: "birthdate-full",
     },
     {
       name: "monotipo",
       label: "Monotipo",
-      type: "list2",
+      type: "string",
+      format: "default",
       values: [
         { label: "Trifásico", value: "Trifásico" },
         { label: "Monofásico", value: "Monofásico" },

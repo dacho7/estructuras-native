@@ -6,21 +6,23 @@ export const ReconectadorModel = [
   },
   [
     { name: "codigo", label: "Código", type: "string", format: "numeric" },
-    ,
     {
       name: "descripcion",
       label: "Descripción",
       type: "string",
+      format: "default",
     },
     {
       name: "direccion",
       label: "Dirección",
       type: "string",
+      format: "default",
     },
     {
       name: "propiedad",
       label: "Propiedad",
-      type: "list2",
+      type: "string",
+      format: "default",
       values: [
         { label: "ALCALDIA", value: "ALCALDIA" },
         { label: "GOBERNACIÓN", value: "GOBERNACIÓN" },
@@ -31,26 +33,24 @@ export const ReconectadorModel = [
       ],
     },
     {
-      name: "direccion",
-      label: "Dirección",
-      type: "string",
-    },
-    {
       name: "fases",
       label: "Fases",
-      type: "list2",
+      type: "string",
+      format: "default",
       values: [{ label: "Sin datos", value: "Sin datos" }],
     },
     {
       name: "fparent",
       label: "FParent",
-      type: "list2",
+      type: "string",
+      format: "default",
       values: [{ label: "Sin datos", value: "Sin datos" }],
     },
     {
       name: "tparent",
       label: "TParent",
-      type: "list2",
+      type: "string",
+      format: "default",
       values: [{ label: "Sin datos", value: "Sin datos" }],
     },
     {
@@ -68,19 +68,22 @@ export const ReconectadorModel = [
     {
       name: "uc",
       label: "Unidad Constructiva",
-      type: "list2",
+      type: "string",
+      format: "default",
       values: [{ label: "Sin datos", value: "Sin datos" }],
     },
     {
       name: "material",
       label: "Material",
-      type: "list2",
+      type: "string",
+      format: "default",
       values: [{ label: "Sin datos", value: "Sin datos" }],
     },
     {
       name: "sernumber",
       label: "Serial Number",
       type: "string",
+      format: "default",
     },
     {
       name: "date_inst",
@@ -90,17 +93,8 @@ export const ReconectadorModel = [
     {
       name: "poblacion",
       label: "Población",
-      type: "list2",
-      values: [
-        { label: "Urbano", value: "Urbano" },
-        { label: "Rural", value: "Rural" },
-        { label: "Centro Poblado", value: "Centro Poblado" },
-      ],
-    },
-    {
-      name: "poblacion",
-      label: "Población",
-      type: "date",
+      type: "real",
+      format: "decimal-pad",
     },
     {
       name: "latitud",
