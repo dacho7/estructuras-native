@@ -1,5 +1,5 @@
 import { ToastAndroid, Alert } from "react-native";
-import { ELIMINAR, GUARDAR, IN_ONLINE } from "../services/crud";
+import { ELIMINAR, GUARDAR, EDITAR, IN_ONLINE } from "../services/crud";
 import { db } from "../services/sqlite";
 import { AcometidaModel } from "../models/Acometida.js";
 import { LineaModel } from "../models/Linea.js";
@@ -9,7 +9,7 @@ import { SeccionadorModel } from "../models/Seccionador.js";
 import { TransformadorModel } from "../models/Transformador";
 
 export const REGISTER_MOVEMENT = async (colecction, datos) => {
-  if (!(await IN_ONLINE()).isConnected) {
+  if ((await IN_ONLINE()).isConnected) {
     const res = await GUARDAR(colecction, datos);
     await GUARDAR("movements", {
       id: res.id,
@@ -28,7 +28,7 @@ export const REGISTER_MOVEMENT = async (colecction, datos) => {
         [colecction, JSON.stringify(datos)],
         (sqlTxn, res) => {
           Alert.alert(
-            "Exito, registro temporal, tus datos se deben sincronizar con internet!"
+            "Registro temporal exitoso, tus datos se deben sincronizar con internet!"
           );
         },
         (error) => {
@@ -51,8 +51,7 @@ export const SINCRONIZAR_DATOS = async () => {
       txn.executeSql(
         "delete from estructuras where 1=1",
         [],
-        async (sqlTxn, res) =>
-          ToastAndroid.show("Tus datos estan sincronizados", ToastAndroid.TOP)
+        async (sqlTxn, res) => console.log("datos eliminados")
       );
     });
   }
@@ -61,6 +60,20 @@ export const SINCRONIZAR_DATOS = async () => {
 export const ELIMINAR_REGISTRO = async (datos) => {
   await ELIMINAR(datos.type, datos.id);
   await ELIMINAR("movements", datos.mov_id);
+};
+
+export const EDITAR_REGISTRO = async (colecction, datos, id, idmov) => {
+  if ((await IN_ONLINE()).isConnected) {
+    await EDITAR(colecction, id, datos);
+    await EDITAR("movements", idmov, {
+      id,
+      type: colecction,
+      description: datos.description,
+    });
+    ToastAndroid.show("Registro exitoso", ToastAndroid.SHORT);
+  } else {
+    ToastAndroid.show("Debes tener conexión internet", ToastAndroid.SHORT);
+  }
 };
 
 export const GET_MODEL = (nombreColeccion) => {

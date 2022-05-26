@@ -20,7 +20,7 @@ export const IN_ONLINE = async () => await NetInfo.fetch();
 
 export const LISTAR = async (colection) => {
   const coleccion = collection(FIRESTORE, colection);
-  if (AUTH.currentUser.email === "admin@gmail.com") {
+  if (AUTH?.currentUser.email === "admin@gmail.com") {
     const consulta = query(coleccion, orderBy("created_at", "desc"));
     const datosConsulta = await getDocs(consulta);
     let datos = [];

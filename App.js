@@ -28,14 +28,6 @@ export default function App() {
         "create table if not exists estructuras (coleccion text, value text);"
       );
     });
-    // db.transaction((txn) => {
-    //   txn.executeSql("select * from estructuras", [], (sqlTxn, res) => {
-    //     res.rows._array.forEach((val) => {
-    //       const par = JSON.parse(val.value);
-    //       console.log(par);
-    //     });
-    //   });
-    // });
   }, []);
 
   return (

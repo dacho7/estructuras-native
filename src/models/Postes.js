@@ -5,11 +5,11 @@ export const PostesModel = [
     updateLabel: "Actualizar Poste",
   },
   [
+    { name: "codigo", label: "Código", type: "string", format: "numeric" },
     {
-      name: "codigo",
-      label: "Codigo",
-      type: "string",
-      format: "default",
+      name: "insta",
+      label: "Fecha Instalación",
+      type: "date",
     },
   ],
 ];

@@ -8,8 +8,9 @@ import {
   TouchableOpacity,
   Alert,
   Image,
+  ToastAndroid,
 } from "react-native";
-import { LISTAR, ELIMINAR } from "../services/crud";
+import { LISTAR } from "../services/crud";
 
 import { ELIMINAR_REGISTRO, SINCRONIZAR_DATOS } from "../generals/functions";
 
@@ -26,6 +27,7 @@ export default function RegistrosScreen(props) {
     await SINCRONIZAR_DATOS();
     const res = await LISTAR("movements");
     setElements(res);
+    ToastAndroid.show("Tus datos estan sincronizados", ToastAndroid.TOP);
   };
 
   const eliminarRegistro = (obj) => {
