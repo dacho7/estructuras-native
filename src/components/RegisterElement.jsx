@@ -106,6 +106,7 @@ export default function RegisterElement(props) {
       idMov,
       allValues
     );
+    props.navigation.goBack();
   };
 
   return (

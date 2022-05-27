@@ -6,7 +6,7 @@ import { GET_MODEL } from "../generals/functions";
 
 import RegisterElement from "../components/RegisterElement";
 
-export default function Edit({ route }) {
+export default function Edit({ route, navigation }) {
   const model = GET_MODEL(route.params.type);
 
   return (
@@ -17,7 +17,11 @@ export default function Edit({ route }) {
             Editar Registro
           </Text>
         </View>
-        <RegisterElement model={model} datosEditar={route.params} />
+        <RegisterElement
+          model={model}
+          datosEditar={route.params}
+          navigation={navigation}
+        />
       </ScrollView>
     </SafeAreaView>
   );

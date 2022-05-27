@@ -78,7 +78,7 @@ export default function Dashboard({ navigation }) {
           </DrawerContentScrollView>
         </SafeAreaView>
       )}
-      initialRouteName="Poste"
+      initialRouteName="Reconectador"
     >
       <Drawer.Screen name="Reconectador">
         {(props) => <RegisterElement {...props} model={ReconectadorModel} />}
