@@ -64,8 +64,8 @@ export const TransformadorModel = [
     {
       name: "type",
       label: "Type",
-      type: "numeric",
-      format: "numeric",
+      type: "string",
+      format: "default",
     },
     {
       name: "tiposub",
@@ -76,7 +76,8 @@ export const TransformadorModel = [
     {
       name: "islight",
       label: "ISLIGHT",
-      type: "numeric",
+      type: "string",
+      format: "default",
     },
     {
       name: "latitud",
