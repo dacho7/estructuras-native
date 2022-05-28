@@ -61,7 +61,7 @@ export const AcometidaModel = [
       name: "poblacion",
       label: "Población",
       type: "string",
-      format: "default",
+      format: "numeric",
       values: [
         { label: "Urbano", value: "Urbano" },
         { label: "Rural", value: "Rural" },

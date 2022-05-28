@@ -99,14 +99,18 @@ export default function RegisterElement(props) {
   };
 
   const actualizarDatos = async () => {
-    await EDITAR_REGISTRO(
-      databaseDates.databaseName,
-      values,
-      id,
-      idMov,
-      allValues
-    );
-    props.navigation.goBack();
+    if (!validarCampos()) {
+      Alert.alert("Algunos datos no son validos");
+    } else {
+      await EDITAR_REGISTRO(
+        databaseDates.databaseName,
+        values,
+        id,
+        idMov,
+        allValues
+      );
+      props.navigation.goBack();
+    }
   };
 
   return (

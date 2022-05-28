@@ -72,10 +72,9 @@ export default function DashboardAdmin({ navigation }) {
       )}
       initialRouteName="Registros"
     >
-      <Drawer.Screen
-        name="Registros"
-        component={RegistrosScreen}
-      ></Drawer.Screen>
+      <Drawer.Screen name="Mis Registros">
+        {(props) => <RegistrosScreen {...props} navigate={navigation} />}
+      </Drawer.Screen>
     </Drawer.Navigator>
   );
 }

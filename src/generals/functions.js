@@ -16,11 +16,7 @@ export const REGISTER_MOVEMENT = async (colecction, datos) => {
       type: colecction,
       description: datos.description,
     });
-    ToastAndroid.showWithGravity(
-      "Registro exitoso",
-      ToastAndroid.SHORT,
-      ToastAndroid.TOP
-    );
+    ToastAndroid.show("Registro exitoso", ToastAndroid.TOP);
   } else {
     db.transaction((tx) => {
       tx.executeSql(
@@ -77,7 +73,7 @@ export const EDITAR_REGISTRO = async (
     allMov.description = datos.description;
     await EDITAR(colecction, id, datos);
     await EDITAR("movements", idmov, allMov);
-    ToastAndroid.show("Registro exitoso", ToastAndroid.SHORT);
+    ToastAndroid.show("Registro actualizado", ToastAndroid.SHORT);
   } else {
     ToastAndroid.show("Debes tener conexión internet", ToastAndroid.SHORT);
   }

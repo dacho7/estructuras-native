@@ -44,6 +44,11 @@ export default function RegistrosScreen(props) {
           onPress: async () => {
             await ELIMINAR_REGISTRO(obj);
             getDates();
+            ToastAndroid.showWithGravity(
+              "Registro eliminado",
+              ToastAndroid.SHORT,
+              ToastAndroid.TOP
+            );
           },
         },
       ]

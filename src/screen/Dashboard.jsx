@@ -89,9 +89,9 @@ export default function Dashboard({ navigation }) {
       <Drawer.Screen name="Transformador">
         {(props) => <RegisterElement {...props} model={TransformadorModel} />}
       </Drawer.Screen>
-      <Drawer.Screen name="Poste">
+      {/* <Drawer.Screen name="Poste">
         {(props) => <RegisterElement {...props} model={PostesModel} />}
-      </Drawer.Screen>
+      </Drawer.Screen> */}
       <Drawer.Screen name="Linea">
         {(props) => <RegisterElement {...props} model={LineaModel} />}
       </Drawer.Screen>
