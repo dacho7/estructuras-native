@@ -123,14 +123,17 @@ const styles = StyleSheet.create({
     margin: 1,
     justifyContent: "center",
     alignItems: "center",
+    padding: 2,
   },
   square2: {
-    backgroundColor: "#c1eff0",
     width: "50%",
     height: 40,
     margin: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 32,
+    elevation: 3,
+    letterSpacing: 0.25,
   },
   font: {
     fontSize: 17,
